@@ -8,27 +8,34 @@ const MovieCard = ({ movie }) => {
       <p className="subs">SUBS / {movie.subs.join(" / ")}</p>
 
       <div className="image-container">
-
         <div className="hover-content">
           <div className="fields-container">
             <p className="field-name">COUNTRY:</p>
-            <p className="field-value">{movie.country.toString().toUpperCase()}</p>
-            
+            <p className="field-value">
+              {typeof movie.country === "string"
+                ? movie.country.toUpperCase()
+                : movie.country.join(" / ").toUpperCase()}
+            </p>
+
             <p className="field-name">ORIGINAL TITLE:</p>
             <p className="field-value">{movie.originalTitle.toUpperCase()}</p>
-            
+
             <p className="field-name">LANGUAGE:</p>
             <p className="field-value">{movie.language.toUpperCase()}</p>
-            
+
             <p className="field-name">IMDB RATING:</p>
             <p className="field-value">{movie.imdbRating.toFixed(1)}</p>
-            
+
             <p className="field-name">VIEWS:</p>
             <p className="field-value">{movie.views}</p>
           </div>
         </div>
 
-        <img className="movie-image" alt={movie.title + " image"} src={movie.image} />
+        <img
+          className="movie-image"
+          alt={movie.title + " image"}
+          src={movie.image}
+        />
       </div>
 
       <p className="genres">{movie.genre.join(" / ")}</p>
