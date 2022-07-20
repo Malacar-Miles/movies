@@ -6,8 +6,8 @@ import {
   addDoc,
   getDoc,
   setDoc,
+  updateDoc,
   collection,
-  writeBatch,
   query,
   getDocs,
 } from "firebase/firestore";
@@ -31,8 +31,9 @@ export const db = getFirestore(app);
 // Write an object that contains movie data into the Firestore database
 export const addMovieToDatabase = async (movie) => {
   try {
-    // Write it into the "movies" collection and use movie.name as a document id
-    await setDoc(doc(db, "movies", movie.name), movie);
+    // Write this object into the "movies" collection with the specified id
+    let uploadedDocRef = await addDoc(collection(db, "movies"), movie);
+    await updateDoc(uploadedDocRef, { id: uploadedDocRef.id });
     console.log("Successfully added a movie to the database");
   } catch (error) {
     console.log("Error uploading movie data: ", error.message);

@@ -5,9 +5,34 @@ import "./movie-card.scss";
 const MovieCard = ({ movie }) => {
   return (
     <article className="movie-card">
-      <img alt={movie.name + " image"} src={movie.image} />
-      <p className="genres">{movie.genres.join(" / ")}</p>
-      <h3>{movie.name}</h3>
+      <p className="subs">SUBS / {movie.subs.join(" / ")}</p>
+
+      <div className="image-container">
+
+        <div className="hover-content">
+          <div className="fields-container">
+            <p className="field-name">COUNTRY:</p>
+            <p className="field-value">{movie.country.toString().toUpperCase()}</p>
+            
+            <p className="field-name">ORIGINAL TITLE:</p>
+            <p className="field-value">{movie.originalTitle.toUpperCase()}</p>
+            
+            <p className="field-name">LANGUAGE:</p>
+            <p className="field-value">{movie.language.toUpperCase()}</p>
+            
+            <p className="field-name">IMDB RATING:</p>
+            <p className="field-value">{movie.imdbRating.toFixed(1)}</p>
+            
+            <p className="field-name">VIEWS:</p>
+            <p className="field-value">{movie.views}</p>
+          </div>
+        </div>
+
+        <img className="movie-image" alt={movie.title + " image"} src={movie.image} />
+      </div>
+
+      <p className="genres">{movie.genre.join(" / ")}</p>
+      <h3 className="title">{movie.title}</h3>
       <p className="year">{movie.year}</p>
     </article>
   );

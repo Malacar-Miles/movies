@@ -1,7 +1,86 @@
 .movie-card {
-  img {
-    width: 300px;
-    height: 450px;
-    object-fit: cover;
+  .subs {
+    font-size: 9px;
+    color: #363C4C;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+
+  .genres {
+    font-size: 12px;
+    color: #666666;
+    font-weight: 500;
+    margin: 15px 0 10px 0;
+  }
+
+  .title {
+    font-size: 22px;
+    color: #363C4C;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .year {
+    font-size: 11px;
+    color: #363C4C;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    margin: 10px 0 0 0;
+  }
+
+  .image-container {
+    position: relative;
+    width: 280px;
+    height: 393px;
+    overflow: hidden;
+
+    .hover-content {
+      position: absolute;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      top: -100%;
+      transition: 0.3s ease;
+
+      .fields-container {
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+
+        .field-name {
+          margin: 0;
+          color: #b3a595;
+          font-size: 9px;
+        }
+
+        .field-value {
+          margin: 0 0 20px 0;
+          color: #fff;
+          font-size: 11px;
+        }
+      }
+
+    }
+
+    .movie-image {
+      position: relative;
+      z-index: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.3s ease;
+    }
+
+    &:hover {
+      .hover-content {
+        top: 0;
+      }
+
+      .movie-image {
+        transform: scale(1.05);
+        filter: blur(7px) grayscale(40%) brightness(30%) contrast(80%);
+      }
+    }
   }
 }
