@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 
 // eslint-disable-next-line
-import { getFirestore, doc, addDoc, getDoc, setDoc, updateDoc, collection, query, getDocs, } from "firebase/firestore";
+import { getFirestore, doc, addDoc, getDoc, setDoc, updateDoc, collection, query, getDocs, FieldValue } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -43,15 +43,19 @@ export const getAllMoviesFromDatabase = async () => {
   }
 };
 
-// Get a movie document with a specific id from Firestore and return it as a movie object
-// If the document doesn't exist, return null
+// Get a movie document with a specific id from Firestore, return it as a movie object and update the viewcount
 export const getMovieFromDatabase = async (movieId) => {
   try {
-    const movieDocument = await getDoc(doc(db, "movies", movieId));
-    if (movieDocument.exists())
-      return movieDocument.data();
-    else
-      return null;
+    const movieDocRef = doc(db, "movies", movieId);
+    const movieDocument = await getDoc(movieDocRef);
+    if (movieDocument.exists()) {
+      // Update the views field in the database then return the movie object
+      const movie = movieDocument.data();
+      updateDoc(movieDocRef, { views: movie.views + 1 });
+      return movie;
+    }
+    // If the document doesn't exist, return null
+    else return null;
   } catch (error) {
     console.log("Failed to fetch specific movie data from DB: ", error.message);
   }
