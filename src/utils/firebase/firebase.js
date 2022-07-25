@@ -1,16 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import {
-  getFirestore,
-  doc,
-  addDoc,
-  getDoc,
-  setDoc,
-  updateDoc,
-  collection,
-  query,
-  getDocs,
-} from "firebase/firestore";
+
+// eslint-disable-next-line
+import { getFirestore, doc, addDoc, getDoc, setDoc, updateDoc, collection, query, getDocs, } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -31,12 +23,11 @@ export const db = getFirestore(app);
 // Write an object that contains movie data into the Firestore database
 export const addMovieToDatabase = async (movie) => {
   try {
-    // Write this object into the "movies" collection with the specified id
-    let uploadedDocRef = await addDoc(collection(db, "movies"), movie);
-    await updateDoc(uploadedDocRef, { id: uploadedDocRef.id });
+    // Write this object into the "movies" collection and use movie.id as the Firestore document id
+    await setDoc(doc(db, "movies", movie.id), movie);
     console.log("Successfully added a movie to the database");
   } catch (error) {
-    console.log("Error uploading movie data: ", error.message);
+    console.log("Failed to upload specific movie data to DB: ", error.message);
   }
 };
 
@@ -48,6 +39,20 @@ export const getAllMoviesFromDatabase = async () => {
     querySnapshot.forEach(movie => results.push(movie.data()));
     return results;
   } catch (error) {
-    console.log("Error downloading movie data: ", error.message);
+    console.log("Failed to fetch all movie data from DB: ", error.message);
+  }
+};
+
+// Get a movie document with a specific id from Firestore and return it as a movie object
+// If the document doesn't exist, return null
+export const getMovieFromDatabase = async (movieId) => {
+  try {
+    const movieDocument = await getDoc(doc(db, "movies", movieId));
+    if (movieDocument.exists())
+      return movieDocument.data();
+    else
+      return null;
+  } catch (error) {
+    console.log("Failed to fetch specific movie data from DB: ", error.message);
   }
 };

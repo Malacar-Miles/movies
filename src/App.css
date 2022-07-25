@@ -5,6 +5,11 @@
 :root {
   --color-dark-grey: #abb8c3;
   --color-light-grey: rgb(237, 238, 240);
+  --color-text-black: #2B2B2F;
+  --color-text-dark-grey: #363C4C;
+  --color-text-light-grey: #999999;
+  --main-section-width--desktop: 964px;
+  --width-mobile-breakpoint: 1000px; /* This is just for my reference, as CSS variables can't be used in @media queries */
 }
 
 body {
@@ -19,4 +24,14 @@ body {
 .app {
   background-color: var(--color-light-grey);
   padding: 30px;
+}
+
+@media only screen and (max-width: 1000px) {
+  body {
+    padding: 0;
+  }
+
+  .app {
+    padding: 15px;
+  }
 }

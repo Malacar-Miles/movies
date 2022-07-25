@@ -1,7 +1,7 @@
 .movie-card {
   .subs {
     font-size: 9px;
-    color: #363C4C;
+    color: var(--color-text-dark-grey);
     font-weight: 600;
     margin-bottom: 5px;
   }
@@ -15,14 +15,15 @@
 
   .title {
     font-size: 22px;
-    color: #363C4C;
+    color: var(--color-text-dark-grey);
     font-weight: 700;
     margin: 0;
+    max-width: 280px;
   }
 
   .year {
     font-size: 11px;
-    color: #363C4C;
+    color: var(--color-text-dark-grey);
     font-weight: 600;
     letter-spacing: 0.4em;
     margin: 10px 0 0 0;
@@ -54,6 +55,7 @@
         }
 
         .field-value {
+          text-transform: uppercase;
           margin: 0 0 20px 0;
           color: #fff;
           font-size: 11px;
@@ -71,16 +73,23 @@
       object-fit: cover;
       transition: 0.3s ease;
     }
+  }
 
-    &:hover {
-      .hover-content {
-        top: 0;
-      }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
 
-      .movie-image {
-        transform: scale(1.05);
-        filter: blur(7px) grayscale(40%) brightness(30%) contrast(80%);
-      }
+@media only screen and (min-width: 1001px) {
+  .movie-card .image-container:hover {
+    .hover-content {
+      top: 0;
+    }
+
+    .movie-image {
+      transform: scale(1.05);
+      filter: blur(7px) grayscale(40%) brightness(30%) contrast(80%);
     }
   }
 }

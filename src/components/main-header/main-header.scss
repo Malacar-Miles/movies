@@ -1,10 +1,32 @@
 .main-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 
   .logo {
     width: 115px;
     height: 60.5px;
+    display: block;
+    transition: 0.3s ease;
+
+    &:hover {
+      filter: grayscale(100%);
+    }
+  }
+}
+
+.main-section {
+  width: var(--main-section-width--desktop);
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 1000px) {
+  .main-header {
+    margin-bottom: 20px;
+  }
+
+  .main-section {
+    width: 100%;
+    margin: 0 auto;
   }
 }

@@ -1,10 +1,13 @@
 import './App.css';
 
-import MainHeader from "./components/main-header/main-header.jsx";
 import { useEffect, useState } from "react";
+import { Route, Routes } from "react-router-dom";
+
+import MainHeader from "./components/main-header/main-header.jsx";
 import { getAllMoviesFromDatabase } from './utils/firebase/firebase';
-import MovieList from './components/movie-list/movie-list';
-import UploadDataButton from './components/upload-data-button/upload-data-button';
+import HomePage from './components/homepage/homepage';
+import MoviePage from './components/movie-page/movie-page';
+// import UploadDataButton from './components/upload-data-button/upload-data-button';
 
 function App() {
   const [ movies, setMovies ] = useState([]);
@@ -20,9 +23,14 @@ function App() {
 
   return (
     <div className="app">
-      <MainHeader />
-      <MovieList movies={movies} />
-      {/* <UploadDataButton /> */}
+      <Routes>
+        <Route path="/" element={<MainHeader />}>
+          <Route index element={<HomePage movies={movies} />} />
+          <Route path="movie/*">
+            <Route path=":id" element={<MoviePage />} />
+          </Route>
+        </Route>
+      </Routes>
     </div>
   );
 }
