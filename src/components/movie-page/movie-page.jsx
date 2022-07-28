@@ -22,7 +22,11 @@ const MoviePage = () => {
     // eslint-disable-next-line
   }, []);
 
-  if (movie)
+  if (movie) {
+    const callToAction = `Watch online ${movie.title} with ${movie.subs
+      .map((langCode) => mapCodeToLanguage[langCode])
+      .join(", ")} subtitles`;
+
     return (
       <div className="movie-page">
         <img
@@ -85,7 +89,7 @@ const MoviePage = () => {
             <div className="subs">
               <span className="field-name">SUBS: </span>
               <span className="field-value">
-                {movie.subs.map((langCode, index) => (
+                {movie.subs.sort().map((langCode, index) => (
                   <>
                     <Link
                       className="link"
@@ -99,10 +103,47 @@ const MoviePage = () => {
               </span>
             </div>
           </div>
+
+          <div className="movie-credits">
+            <div className="credits-section">
+              <div className="field-title">
+                <span className="field-name">DIRECTOR</span>
+              </div>
+              <div className="field-values">
+                {typeof movie.director === "string" ? (
+                  <span className="field-value-small">{movie.director}</span>
+                ) : (
+                  movie.director.map((director, index) => (
+                    <span key={index} className="field-value-credits">
+                      {director}
+                    </span>
+                  ))
+                )}
+              </div>
+            </div>
+            <div className="credits-section">
+              <div className="field-title">
+                <span className="field-name">ACTORS</span>
+              </div>
+              <div className="field-values">
+                {movie.actors.map((actor, index) => (
+                  <span key={index} className="field-value-credits">
+                    {actor}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="movie-description">
+            <span className="description">{movie.description}</span>
+            <h2 className="call-to-action">{callToAction}</h2>
+          </div>
+
         </div>
       </div>
     );
-  else if (movie === null) return <h2>Movie not found in the database!</h2>;
+  } else if (movie === null) return <h2>Movie not found in the database!</h2>;
   else return null;
 };
 

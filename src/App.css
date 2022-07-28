@@ -8,6 +8,8 @@
   --color-text-black: #2B2B2F;
   --color-text-dark-grey: #363C4C;
   --color-text-light-grey: #999999;
+  --color-text-lightest-grey: #CCC;
+  --color-text-light-blue: #4c51fb;
   --main-section-width--desktop: 964px;
   --width-mobile-breakpoint: 1000px; /* This is just for my reference, as CSS variables can't be used in @media queries */
 }
