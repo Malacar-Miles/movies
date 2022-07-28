@@ -111,7 +111,7 @@ const MoviePage = () => {
               </div>
               <div className="field-values">
                 {typeof movie.director === "string" ? (
-                  <span className="field-value-small">{movie.director}</span>
+                  <span className="field-value-credits">{movie.director}</span>
                 ) : (
                   movie.director.map((director, index) => (
                     <span key={index} className="field-value-credits">
