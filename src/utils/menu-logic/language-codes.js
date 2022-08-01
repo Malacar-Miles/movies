@@ -1,3 +1,5 @@
+import { reverseMap } from "./helper-functions"
+
 export const mapCodeToLanguage = {
   "AF": "Afrikaans",
   "AR": "Arabic",
@@ -31,3 +33,5 @@ export const mapCodeToLanguage = {
   "TR": "Turkish",
   "UK": "Ukrainian"
 }
+
+export const mapLanguageToCode = reverseMap(mapCodeToLanguage);

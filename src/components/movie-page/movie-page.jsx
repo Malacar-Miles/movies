@@ -6,15 +6,16 @@ import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import { getMovieFromDatabase } from "../../utils/firebase/firebase";
-import { mapCodeToLanguage } from "../../utils/language-codes";
+import { mapCodeToLanguage } from "../../utils/menu-logic/language-codes";
+import PageNotFound from "../page-not-found/page-not-found";
 
 const MoviePage = () => {
-  const { id } = useParams();
+  const { movieId } = useParams();
   const [movie, setMovie] = useState();
 
   useEffect(() => {
     const getMovieData = async () => {
-      const movieData = await getMovieFromDatabase(id);
+      const movieData = await getMovieFromDatabase(movieId);
       setMovie(movieData);
     };
 
@@ -143,7 +144,7 @@ const MoviePage = () => {
         </div>
       </div>
     );
-  } else if (movie === null) return <h2>Movie not found in the database!</h2>;
+  } else if (movie === null) return <PageNotFound />;
   else return null;
 };
 
