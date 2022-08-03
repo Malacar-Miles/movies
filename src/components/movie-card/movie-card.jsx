@@ -15,16 +15,14 @@ const MovieCard = ({ movie }) => {
             <div className="fields-container">
               <p className="field-name">COUNTRY:</p>
               <p className="field-value">
-                {typeof movie.country === "string"
-                  ? movie.country
-                  : movie.country.join(" / ")}
+                {movie.country.join(" / ")}
               </p>
 
               <p className="field-name">ORIGINAL TITLE:</p>
               <p className="field-value">{movie.originalTitle}</p>
 
               <p className="field-name">LANGUAGE:</p>
-              <p className="field-value">{movie.language}</p>
+              <p className="field-value">{movie.language.join(" / ")}</p>
 
               <p className="field-name">IMDB RATING:</p>
               <p className="field-value">{movie.imdbRating.toFixed(1)}</p>

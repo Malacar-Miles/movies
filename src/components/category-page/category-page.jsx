@@ -4,26 +4,57 @@
 import "./category-page.scss";
 
 import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 import { mapIdToGenre } from "../../utils/menu-logic/genres";
 import { mapCountryNounToAdjective } from "../../utils/menu-logic/countries";
+import { mapLanguageToCode } from "../../utils/menu-logic/language-codes";
+import { decadeBoundaries } from "../../utils/menu-logic/decades";
 import { toTitleCase } from "../../utils/menu-logic/helper-functions";
+import { categories } from "../../utils/menu-logic/categories";
+import { getMoviesByCategoryFromDatabase } from "../../utils/firebase/firebase";
 import PageNotFound from "../page-not-found/page-not-found";
-
+import MovieList from "../movie-list/movie-list";
 
 const CategoryPage = () => {
   const { categoryId, itemId } = useParams();
+  const [ movies, setMovies ] = useState([]);
+  let categoryPageTitle, categoryPageSubtitle;
+
+  useEffect(() => {
+    // Get a filtered movie list from the database
+    const getMovies = async () => {
+      const filteredMovies = await getMoviesByCategoryFromDatabase(categoryId, itemId);
+      setMovies(filteredMovies);
+    };
+
+    getMovies();
+    // eslint-disable-next-line
+  }, []);
 
   // Generate a page title (and in some cases a subtitle) based on categoryId and itemId
-  let categoryPageTitle, categoryPageSubtitle;
   switch (categoryId) {
-    case "genre":
-      categoryPageTitle = mapIdToGenre[itemId];
+    case categories.genre:
+      // If itemId is found in the list of supported genres then assign a value to categoryPageTitle, otherwise assign null
+      categoryPageTitle = mapIdToGenre[itemId] || null;
       categoryPageSubtitle = "Eastern European";
       break;
-    case "country":
-      categoryPageTitle = mapCountryNounToAdjective[toTitleCase(itemId)];
+    case categories.country:
+      // If itemId is found in the list of supported countries then assign a value to categoryPageTitle, otherwise assign null
+      categoryPageTitle =
+        mapCountryNounToAdjective[toTitleCase(itemId)] || null;
       if (categoryPageTitle) categoryPageTitle += " Movies";
+      break;
+    case categories.subtitles:
+      const country = toTitleCase(itemId);
+      // If itemId is found in the list of supported countries then assign a value to categoryPageTitle, otherwise assign null
+      categoryPageTitle =
+        (mapLanguageToCode[country] && country + " Subtitles") || null;
+      break;
+    case categories.decade:
+      // If itemId is a valid decade then assign a value to categoryPageTitle, otherwise assign null
+      categoryPageTitle =
+        (decadeBoundaries(itemId) && itemId + "'s Movies") || null;
       break;
     default:
       categoryPageTitle = null;
@@ -39,8 +70,7 @@ const CategoryPage = () => {
           )}
           {categoryPageTitle}
         </h1>
-        <p>categoryId: <em>{categoryId}</em></p>
-        <p>itemId: <em>{itemId}</em></p>
+        <MovieList movies={movies} />
       </div>
     );
   else return <PageNotFound />;

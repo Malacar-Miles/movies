@@ -24,7 +24,7 @@ const MoviePage = () => {
   }, []);
 
   if (movie) {
-    const callToAction = `Watch online ${movie.title} with ${movie.subs
+    const genericDescription = `${movie.title} with ${movie.subs
       .map((langCode) => mapCodeToLanguage[langCode])
       .join(", ")} subtitles`;
 
@@ -58,26 +58,17 @@ const MoviePage = () => {
             <div className="country">
               <span className="field-name">COUNTRY: </span>
               <span className="field-value">
-                {typeof movie.country === "string" ? (
-                  <Link
-                    className="link"
-                    to={"/country/" + movie.country.toLowerCase()}
-                  >
-                    {movie.country}
-                  </Link>
-                ) : (
-                  movie.country.map((country, index) => (
-                    <>
-                      <Link
-                        className="link"
-                        key={index}
-                        to={"/country/" + country.toLowerCase()}
-                      >
-                        {country}
-                      </Link>{" "}
-                    </>
-                  ))
-                )}
+                {movie.country.map((country, index) => (
+                  <>
+                    <Link
+                      className="link"
+                      key={index}
+                      to={"/country/" + country.toLowerCase()}
+                    >
+                      {country}
+                    </Link>{" "}
+                  </>
+                ))}
               </span>
             </div>
             <div className="imdb">
@@ -111,15 +102,11 @@ const MoviePage = () => {
                 <span className="field-name">DIRECTOR</span>
               </div>
               <div className="field-values">
-                {typeof movie.director === "string" ? (
-                  <span className="field-value-credits">{movie.director}</span>
-                ) : (
-                  movie.director.map((director, index) => (
-                    <span key={index} className="field-value-credits">
-                      {director}
-                    </span>
-                  ))
-                )}
+                {movie.director.map((director, index) => (
+                  <span key={index} className="field-value-credits">
+                    {director}
+                  </span>
+                ))}
               </div>
             </div>
             <div className="credits-section">
@@ -137,15 +124,18 @@ const MoviePage = () => {
           </div>
 
           <div className="movie-description">
-            <span className="description">{movie.description}</span>
-            <h2 className="call-to-action">{callToAction}</h2>
+            <span className="description">
+              {genericDescription + " " + movie.description}
+            </span>
+            <h2 className="call-to-action">
+              {"Watch Online " + genericDescription}
+            </h2>
           </div>
-
         </div>
       </div>
     );
   } else if (movie === null) return <PageNotFound />;
-  else return null;
+  else return null; // This should trigger if movie is undefined
 };
 
 export default MoviePage;
