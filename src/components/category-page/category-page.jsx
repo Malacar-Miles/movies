@@ -30,7 +30,7 @@ const CategoryPage = () => {
 
     getMovies();
     // eslint-disable-next-line
-  }, []);
+  }, [categoryId, itemId]);
 
   // Generate a page title (and in some cases a subtitle) based on categoryId and itemId
   switch (categoryId) {

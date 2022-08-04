@@ -1,15 +1,15 @@
+export const minDecade = 1930, maxDecade = 2010;
+
 export const decadeBoundaries = (inputYearString) => {
   const inputYear = Number(inputYearString);
 
   // Validate input
-  const minYear = 1930,
-    maxYear = 2010;
   // If the input isn't a number or it isn't divisible by 10 or it's outside the valid range, return null
   if (
     Number.isNaN(inputYear) ||
     inputYear % 10 !== 0 ||
-    inputYear < minYear ||
-    inputYear > maxYear
+    inputYear < minDecade ||
+    inputYear > maxDecade
   )
     return null;
 
@@ -20,3 +20,12 @@ export const decadeBoundaries = (inputYearString) => {
   };
 };
 
+const calculateAllDecades = () => {
+  const result = [];
+  for (let i = minDecade; i <= maxDecade; i = i + 10)
+    result.push(i);
+  return(result);
+}
+
+// This array will be used for rendering some menus
+export const allDecadesArray = calculateAllDecades();

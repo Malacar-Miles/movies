@@ -1,11 +1,58 @@
 .menu-item {
-  border-bottom: 2px solid black;
-  padding: 3px;
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 
   h2 {
-    margin: 0;
+    margin: 0;    
     letter-spacing: 0.4rem;
     font-size: 11px;
     font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .item-header {
+    border-bottom: 2px solid black;
+    padding: 3px;
+  }
+
+  .sub-menu {
+    position: absolute;
+    z-index: 2;
+    background-color: white;
+    min-width: 180px;
+
+    margin-top: -80px;
+    margin-left: -20px;
+    padding: 57px 20px 30px 20px;
+    
+    .item-header-internal {
+      color: var(--color-text-light-blue);
+      border-bottom: 2px solid var(--color-text-light-blue);
+      padding: 3px;
+    }
+
+    .sub-items-container {
+      margin-top: 30px;      
+
+      &.genres {
+        display: grid;
+        grid-auto-flow: column;
+        grid-template-rows: repeat(7, auto);
+      }
+
+      &.subs {
+        display: grid;
+        grid-auto-flow: column;
+        grid-template-rows: repeat(11, auto);
+      }
+
+      &.other {
+        display: flex;
+        flex-direction: column;
+      }
+    }
   }
 }
+

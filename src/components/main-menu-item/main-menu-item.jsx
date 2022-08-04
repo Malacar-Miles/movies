@@ -2,10 +2,32 @@
 
 import "./main-menu-item.scss";
 
-const MainMenuItem = ({ itemName }) => {
+import { useState } from "react";
+
+const MainMenuItem = ({ itemName, containerType, children }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleMouseOver = () => {
+    setIsOpen(true);
+  };
+
+  const handleMouseOut = () => {
+    setIsOpen(false);
+  };
+
   return (
-    <div className="menu-item">
-      <h2>{itemName.toUpperCase()}</h2>
+    <div className="menu-item" onMouseOver={handleMouseOver}>
+      <div className="item-header">
+        <h2>{itemName}</h2>
+      </div>
+      {isOpen && (
+        <div className="sub-menu" onMouseOut={handleMouseOut}>
+          <div className="item-header-internal">
+            <h2>{itemName}</h2>
+          </div>
+          <div className={`sub-items-container ${containerType}`}>{children}</div>
+        </div>
+      )}
     </div>
   );
 };
