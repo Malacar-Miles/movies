@@ -12,7 +12,7 @@ import { mapLanguageToCode } from "../../utils/menu-logic/language-codes";
 import { decadeBoundaries } from "../../utils/menu-logic/decades";
 import { toTitleCase } from "../../utils/menu-logic/helper-functions";
 import { categories } from "../../utils/menu-logic/categories";
-import { getMoviesByCategoryFromDatabase } from "../../utils/firebase/firebase";
+import { getAllMoviesFromDatabase, getMoviesByCategoryFromDatabase } from "../../utils/firebase/firebase";
 import PageNotFound from "../page-not-found/page-not-found";
 import MovieList from "../movie-list/movie-list";
 
@@ -24,8 +24,10 @@ const CategoryPage = () => {
   useEffect(() => {
     // Get a filtered movie list from the database
     const getMovies = async () => {
-      const filteredMovies = await getMoviesByCategoryFromDatabase(categoryId, itemId);
-      setMovies(filteredMovies);
+      if (categoryId === categories.genre && itemId === "all")
+        setMovies(await getAllMoviesFromDatabase());
+      else 
+        setMovies(await getMoviesByCategoryFromDatabase(categoryId, itemId));
     };
 
     getMovies();
@@ -38,6 +40,10 @@ const CategoryPage = () => {
       // If itemId is found in the list of supported genres then assign a value to categoryPageTitle, otherwise assign null
       categoryPageTitle = mapIdToGenre[itemId] || null;
       categoryPageSubtitle = "Eastern European";
+      if (itemId === "all") {
+        categoryPageTitle = "Eastern European Movies";
+        categoryPageSubtitle = "All"
+      }
       break;
     case categories.country:
       // If itemId is found in the list of supported countries then assign a value to categoryPageTitle, otherwise assign null

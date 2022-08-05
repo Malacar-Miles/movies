@@ -3,6 +3,7 @@
 import "./main-menu-item.scss";
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const MainMenuItem = ({ itemName, containerType, children }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,6 +27,11 @@ const MainMenuItem = ({ itemName, containerType, children }) => {
             <h2>{itemName}</h2>
           </div>
           <div className={`sub-items-container ${containerType}`}>{children}</div>
+          {containerType === "genres" && (
+            <div className="all-movies-button">
+              <Link to="/genre/all">All Movies</Link>
+            </div>
+          )}
         </div>
       )}
     </div>

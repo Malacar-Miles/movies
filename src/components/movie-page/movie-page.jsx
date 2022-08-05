@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 
 import { getMovieFromDatabase } from "../../utils/firebase/firebase";
 import { mapCodeToLanguage } from "../../utils/menu-logic/language-codes";
+import { categories } from "../../utils/menu-logic/categories";
 import PageNotFound from "../page-not-found/page-not-found";
 
 const MoviePage = () => {
@@ -39,7 +40,7 @@ const MoviePage = () => {
         <div className="content-column">
           <span className="movie-breadcrumbs">
             <Link to="/">Eastern European Movies</Link>&nbsp;&gt;{" "}
-            <Link to={"/" + movie.genre[0].toLowerCase()}>
+            <Link to={`/${categories.genre}/${movie.genre[0].toLowerCase()}`}>
               {movie.genre[0]}
             </Link>
             &nbsp;&gt; {movie.title}
@@ -63,7 +64,7 @@ const MoviePage = () => {
                     <Link
                       className="link"
                       key={index}
-                      to={"/country/" + country.toLowerCase()}
+                      to={`/${categories.country}/${country.toLowerCase()}`}
                     >
                       {country}
                     </Link>{" "}
@@ -86,7 +87,7 @@ const MoviePage = () => {
                     <Link
                       className="link"
                       key={index}
-                      to={mapCodeToLanguage[langCode].toLowerCase()}
+                      to={`/${categories.subtitles}/${mapCodeToLanguage[langCode].toLowerCase()}`}
                     >
                       {langCode}
                     </Link>{" "}

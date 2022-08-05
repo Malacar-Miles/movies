@@ -4,6 +4,10 @@
     color: var(--color-text-dark-grey);
     font-weight: 600;
     margin-bottom: 5px;
+
+    .subs-link::before {
+      content: " / ";
+    }
   }
 
   .genres {
@@ -11,6 +15,10 @@
     color: #666666;
     font-weight: 500;
     margin: 15px 0 10px 0;
+
+    .genre-link:not(:first-child)::before {
+    content: " / ";
+    }
   }
 
   .title {
