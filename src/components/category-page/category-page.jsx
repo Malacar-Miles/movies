@@ -21,19 +21,22 @@ import SortAndFilter from "../sort-and-filter/sort-and-filter";
 const CategoryPage = () => {
   const { categoryId, itemId } = useParams();
   const [ movies, setMovies ] = useState([]);
-  const [ filter, setFilter ] = useState(emptyFilter);
+  const [ filter, setFilter ] = useState({});
   let categoryPageTitle, categoryPageSubtitle;
 
   useEffect(() => {
+    // Reset the filter
+    setFilter(emptyFilter);
+    
     // Get a filtered movie list from the database
     const getMovies = async () => {
-      if (categoryId === categories.genre && itemId === "all")
+      if (categoryId === categories.genre && itemId === "all-movies")
         setMovies(await getAllMoviesFromDatabase());
       else 
         setMovies(await getMoviesByCategoryFromDatabase(categoryId, itemId));
     };
-
     getMovies();
+
     // eslint-disable-next-line
   }, [categoryId, itemId]);
 
@@ -43,7 +46,7 @@ const CategoryPage = () => {
       // If itemId is found in the list of supported genres then assign a value to categoryPageTitle, otherwise assign null
       categoryPageTitle = mapIdToGenre[itemId] || null;
       categoryPageSubtitle = "Eastern European";
-      if (itemId === "all") {
+      if (itemId === "all-movies") {
         categoryPageTitle = "Eastern European Movies";
         categoryPageSubtitle = "All"
       }
@@ -68,7 +71,7 @@ const CategoryPage = () => {
     default:
       categoryPageTitle = null;
   }
-
+  
   // Only render the page if categoryPageTitle is truthy. Otherwise render the 404 page
   if (categoryPageTitle)
     return (
@@ -79,7 +82,12 @@ const CategoryPage = () => {
           )}
           {categoryPageTitle}
         </h1>
-        <SortAndFilter filter={filter} setFilter={setFilter} />
+        <SortAndFilter
+          categoryId={categoryId}
+          itemId={itemId}
+          filter={filter}
+          setFilter={setFilter}
+        />
         <MovieList movies={movies} />
       </div>
     );

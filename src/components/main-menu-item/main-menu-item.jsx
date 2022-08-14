@@ -29,7 +29,7 @@ const MainMenuItem = ({ itemName, containerType, children }) => {
           <div className={`sub-items-container ${containerType}`}>{children}</div>
           {containerType === "genres" && (
             <div className="all-movies-button">
-              <Link to="/genre/all">All Movies</Link>
+              <Link to="/genre/all-movies">All Movies</Link>
             </div>
           )}
         </div>
