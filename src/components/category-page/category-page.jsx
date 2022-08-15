@@ -5,6 +5,7 @@ import "./category-page.scss";
 
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import { mapIdToGenre } from "../../utils/menu-logic/genres";
 import { mapCountryNounToAdjective } from "../../utils/menu-logic/countries";
@@ -13,6 +14,7 @@ import { decadeBoundaries } from "../../utils/menu-logic/decades";
 import { toTitleCase } from "../../utils/menu-logic/helper-functions";
 import { categories } from "../../utils/menu-logic/categories";
 import { getAllMoviesFromDatabase, getMoviesByCategoryFromDatabase } from "../../utils/firebase/firebase";
+import { resetFilter } from "../../utils/redux/filter-slice";
 import PageNotFound from "../page-not-found/page-not-found";
 import MovieList from "../movie-list/movie-list";
 import SortAndFilter from "../sort-and-filter/sort-and-filter";
@@ -20,10 +22,12 @@ import SortAndFilter from "../sort-and-filter/sort-and-filter";
 const CategoryPage = () => {
   const { categoryId, itemId } = useParams();
   const [ movies, setMovies ] = useState([]);
+  const dispatch = useDispatch();
   let categoryPageTitle, categoryPageSubtitle;
 
   useEffect(() => {
     // Reset the filter
+    dispatch(resetFilter());
     
     
     // Get a filtered movie list from the database
@@ -84,7 +88,7 @@ const CategoryPage = () => {
           categoryId={categoryId}
           itemId={itemId}
         />
-        <MovieList movies={movies} />
+        <MovieList movies={movies} enableFilter />
       </div>
     );
   else return <PageNotFound />;

@@ -8,8 +8,8 @@ export const filterSlice = createSlice({
   name: "filter",
   initialState,
   reducers: {
-    reset: (state) => {
-      state = emptyFilter;
+    resetFilter: () => {
+      return emptyFilter;
     },
 
     addValueToField: (state, action) => {
@@ -40,5 +40,5 @@ export const selectFieldPossibleValues = (fieldName) => {
   return ((state) => state.filter[fieldName].fieldPossibleValues);
 };
 
-export const { reset, addValueToField, removeValueFromField } = filterSlice.actions;
+export const { resetFilter, addValueToField, removeValueFromField } = filterSlice.actions;
 export default filterSlice.reducer;
