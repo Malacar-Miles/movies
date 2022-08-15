@@ -1,20 +1,36 @@
 import "./filter-field.scss";
 
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import FilterFieldValue from "../filter-field-value/filter-field-value";
+import {
+  addValueToField,
+  removeValueFromField,
+  selectFieldCurrentValues,
+  selectFieldPossibleValues,
+} from "../../utils/redux/filter-slice";
 
-const FilterField = ({
-  fieldName,
-  fieldDisplayName,
-  fieldPlaceholderText,
-  fieldData,
-  fieldAddValue,
-  fieldRemoveValue,
-}) => {
+const FilterField = ({ fieldName, fieldDisplayName, fieldPlaceholderText }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const { fieldCurrentValues, fieldPossibleValues } = fieldData;
+  const dispatch = useDispatch();
+
+  const fieldCurrentValues = useSelector(selectFieldCurrentValues(fieldName));
+  const fieldPossibleValues = useSelector(selectFieldPossibleValues(fieldName));
+
+  const fieldAddValue = (fieldName, newValue) => {
+    dispatch(addValueToField({ fieldName: fieldName, newValue: newValue }));
+  };
+
+  const fieldRemoveValue = (fieldName, valueToRemove) => {
+    dispatch(
+      removeValueFromField({
+        fieldName: fieldName,
+        valueToRemove: valueToRemove,
+      })
+    );
+  };
 
   const handleMenuClick = () => {
     setIsMenuOpen(!isMenuOpen);

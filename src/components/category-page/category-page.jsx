@@ -12,7 +12,6 @@ import { mapLanguageToCode } from "../../utils/menu-logic/language-codes";
 import { decadeBoundaries } from "../../utils/menu-logic/decades";
 import { toTitleCase } from "../../utils/menu-logic/helper-functions";
 import { categories } from "../../utils/menu-logic/categories";
-import { emptyFilter } from "../../utils/menu-logic/filter";
 import { getAllMoviesFromDatabase, getMoviesByCategoryFromDatabase } from "../../utils/firebase/firebase";
 import PageNotFound from "../page-not-found/page-not-found";
 import MovieList from "../movie-list/movie-list";
@@ -21,12 +20,11 @@ import SortAndFilter from "../sort-and-filter/sort-and-filter";
 const CategoryPage = () => {
   const { categoryId, itemId } = useParams();
   const [ movies, setMovies ] = useState([]);
-  const [ filter, setFilter ] = useState({});
   let categoryPageTitle, categoryPageSubtitle;
 
   useEffect(() => {
     // Reset the filter
-    setFilter(emptyFilter);
+    
     
     // Get a filtered movie list from the database
     const getMovies = async () => {
@@ -85,8 +83,6 @@ const CategoryPage = () => {
         <SortAndFilter
           categoryId={categoryId}
           itemId={itemId}
-          filter={filter}
-          setFilter={setFilter}
         />
         <MovieList movies={movies} />
       </div>
