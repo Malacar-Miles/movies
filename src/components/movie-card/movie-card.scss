@@ -1,4 +1,8 @@
 .movie-card {
+  @media only screen and (max-width: 400px) {
+    width: 80%;
+  }
+  
   .subs {
     font-size: 9px;
     color: var(--color-text-dark-grey);
@@ -39,8 +43,8 @@
 
   .image-container {
     position: relative;
-    width: 280px;
-    height: 393px;
+    width: 100%;
+    aspect-ratio: 1 / 1.4;
     overflow: hidden;
 
     .hover-content {

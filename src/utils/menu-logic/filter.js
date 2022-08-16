@@ -10,15 +10,16 @@ class filterField {
   }
 }
 
+// Create an object that will serve as an empty filter
 const emptyFilterWithTypes = {
   subs: new filterField(Object.keys(mapLanguageToCode)),
   genre: new filterField(Object.keys(mapGenreToId)),
   country: new filterField(Object.keys(mapCountryNounToAdjective)),
   decade: new filterField(allDecadesArray),
-  director: new filterField([]),
-  actors: new filterField([]),
+  // I've decided to not implement filtering by directors and actors for now
+  // director: new filterField([]),
+  // actors: new filterField([]),
 };
-
 // Turn this object into a generic JavaScript object to avoid "non-serializable data" error in Redux
 export const emptyFilter = JSON.parse(JSON.stringify(emptyFilterWithTypes));
 
@@ -35,12 +36,13 @@ export const filterMovieList = (movies, filter) =>
         // has a field with the same name as the filter field
         if (movie[filterField]) {
           if (filterField === "subs") {
-            // Subs are stored as two-letter codes in movie data, but 
-            // they are stored as language strings in the filter.
+            // Subtitles are stored as two-letter codes in the movie object,
+            // but they are stored as language strings in the filter.
             // Therefore we need to convert the filter values to codes.
             values = values.map((value) => mapLanguageToCode[value]);
           }
-          // Check if any of the values in the filter field is contained in the corresponding array of the movie
+          // Check if any of the values in the filter field array is contained
+          // in the corresponding array of the movie object
           values.forEach((value) => {
             if (movie[filterField].includes(value)) filterMatchFound = true;
           });

@@ -39,6 +39,9 @@ export const selectFieldCurrentValues = (fieldName) => {
 export const selectFieldPossibleValues = (fieldName) => {
   return ((state) => state.filter[fieldName].fieldPossibleValues);
 };
+export const selectCurrentFilter = () => {
+  return ((state) => state.filter);
+};
 
 export const { resetFilter, addValueToField, removeValueFromField } = filterSlice.actions;
 export default filterSlice.reducer;

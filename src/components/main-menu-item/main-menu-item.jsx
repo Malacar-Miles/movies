@@ -16,6 +16,10 @@ const MainMenuItem = ({ itemName, containerType, children }) => {
     setIsOpen(false);
   };
 
+  const handleHeaderClick = () => {
+    setIsOpen(false);
+  };
+
   return (
     <div className="menu-item" onMouseOver={handleMouseOver}>
       <div className="item-header">
@@ -23,7 +27,7 @@ const MainMenuItem = ({ itemName, containerType, children }) => {
       </div>
       {isOpen && (
         <div className="sub-menu" onMouseOut={handleMouseOut}>
-          <div className="item-header-internal">
+          <div className="item-header-internal" onClick={handleHeaderClick}>
             <h2>{itemName}</h2>
           </div>
           <div className={`sub-items-container ${containerType}`}>{children}</div>
