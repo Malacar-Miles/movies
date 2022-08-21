@@ -17,3 +17,11 @@
     align-items: center;
   }
 }
+
+.no-movies-found {
+  display: block;
+  font-size: 60px;
+  font-weight: bold;
+  text-align: center;
+  color: var(--color-light-red);
+}

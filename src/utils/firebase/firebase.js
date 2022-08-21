@@ -83,6 +83,33 @@ export const getMoviesByCategoryFromDatabase = async (categoryId, itemId) => {
   }
 };
 
+// Get all movie documents from Firestore, then filter them, returning only those whose titles match the search query.
+// This is inefficient, but Firestore doesn't support searching by substrings.
+export const searchAllMoviesFromDatabase = async (searchQuery) => {
+  const searchForSubstring = (stringToCheck, subString) => {
+    // This is a helper function that returns true if stringToCheck contains every word from subString
+    const wordsToCheck = stringToCheck.toLowerCase().split(" ");
+    const wordsFromSubString = subString.toLowerCase().split(" ");
+    let result = true;
+    wordsFromSubString.forEach((word) => {
+      if (!wordsToCheck.includes(word)) result = false;
+    });
+    return result;
+  };
+
+  try {
+    const querySnapshot = await getDocs(collection(db, "movies"));
+    const results = [];
+    querySnapshot.forEach((movie) => results.push(movie.data()));
+    const filteredResults = results.filter((movie) =>
+      searchForSubstring(movie.title, searchQuery)
+    );
+    return filteredResults;
+  } catch (error) {
+    console.log("Failed to fetch all movie data from DB for searching: ", error.message);
+  }
+};
+
 // Get a movie document with a specific id from Firestore, return it as a movie object and update the viewcount
 export const getMovieFromDatabase = async (movieId) => {
   try {

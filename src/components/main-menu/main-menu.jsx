@@ -4,6 +4,7 @@ import "./main-menu.scss";
 
 import MainMenuItem from "../main-menu-item/main-menu-item";
 import MainMenuSubItem from "../main-menu-sub-item/main-menu-sub-item";
+import SearchWidget from "../search-widget/search-widget";
 import { mapGenreToId } from "../../utils/menu-logic/genres";
 import { mapCountryNounToAdjective } from "../../utils/menu-logic/countries";
 import { allDecadesArray } from "../../utils/menu-logic/decades";
@@ -68,11 +69,7 @@ const MainMenu = () => {
         }
       </MainMenuItem>
 
-      <img
-        className="search-icon"
-        alt="Search icon"
-        src="/img/search-icon.svg"
-      />
+      <SearchWidget />
     </nav>
   );
 };

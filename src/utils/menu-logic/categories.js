@@ -3,5 +3,6 @@
     genre: "genre",
     country: "country",
     subtitles: "subtitles_languages",
-    decade: "decades"
+    decade: "decades",
+    search: "search"
   };
