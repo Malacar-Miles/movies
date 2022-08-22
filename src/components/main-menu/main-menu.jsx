@@ -3,6 +3,7 @@
 import "./main-menu.scss";
 
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 import MainMenuItem from "../main-menu-item/main-menu-item";
 import MainMenuSubItem from "../main-menu-sub-item/main-menu-sub-item";
@@ -13,9 +14,16 @@ import { allDecadesArray } from "../../utils/menu-logic/decades";
 import { mapLanguageToCode } from "../../utils/menu-logic/language-codes";
 
 const MainMenu = () => {
+  const [openMenuItem, setOpenMenuItem] = useState(null);
+
   return (
     <nav className="main-menu">
-      <MainMenuItem itemName="Genre" containerType="genres">
+      <MainMenuItem
+        itemName="Genre"
+        containerType="genres"
+        openMenuItem={openMenuItem}
+        setOpenMenuItem={setOpenMenuItem}
+      >
         {
           // Render a menu sub-item for each entry in the mapGenreToId object
           Object.keys(mapGenreToId).map((genre, index) => (
@@ -28,14 +36,19 @@ const MainMenu = () => {
           ))
         }
         {
-          // Also render an All Movies button.
+          // Also render All Movies button.
           <div className="all-movies-button">
             <Link to="/genre/all-movies">All Movies</Link>
           </div>
         }
       </MainMenuItem>
 
-      <MainMenuItem itemName="Country" containerType="other">
+      <MainMenuItem
+        itemName="Country"
+        containerType="other"
+        openMenuItem={openMenuItem}
+        setOpenMenuItem={setOpenMenuItem}
+      >
         {
           // Render a menu sub-item for each entry in the mapCountryNounToAdjective object
           Object.keys(mapCountryNounToAdjective).map((country, index) => (
@@ -49,7 +62,12 @@ const MainMenu = () => {
         }
       </MainMenuItem>
 
-      <MainMenuItem itemName="Subtitle Language" containerType="subs">
+      <MainMenuItem
+        itemName="Subtitle Language"
+        containerType="subs"
+        openMenuItem={openMenuItem}
+        setOpenMenuItem={setOpenMenuItem}
+      >
         {
           // Render a menu sub-item for each entry in the mapLanguageToCode object
           Object.keys(mapLanguageToCode).map((language, index) => (
@@ -66,7 +84,12 @@ const MainMenu = () => {
         }
       </MainMenuItem>
 
-      <MainMenuItem itemName="Decade" containerType="other">
+      <MainMenuItem
+        itemName="Decade"
+        containerType="other"
+        openMenuItem={openMenuItem}
+        setOpenMenuItem={setOpenMenuItem}
+      >
         {
           // Render a menu sub-item for each entry in the allDecadesArray
           allDecadesArray.map((decade) => (

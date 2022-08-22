@@ -5,7 +5,24 @@
     margin: 16px 0 10px 0;
     display: flex;
     align-items: center;
+    // The CSS for .arrow-up and .arrow-down is contained in app.scss
   }
 
-  // The CSS for .arrow-up and .arrow-down is contained in app.scss
+  /* TO DO: solve the problem with animation
+  .sub-items-container {
+    overflow: hidden;
+    animation-name: mobile-menu-item-grow;
+    animation-duration: 1s;
+
+    @keyframes mobile-menu-item-grow {
+      from {
+        height: 0;
+      }
+    
+      to {
+        height: auto;
+      }
+    }
+  }
+  */
 }

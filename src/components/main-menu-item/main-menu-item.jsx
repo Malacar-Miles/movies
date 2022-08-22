@@ -2,21 +2,18 @@
 
 import "./main-menu-item.scss";
 
-import { useState } from "react";
-
-const MainMenuItem = ({ itemName, containerType, children }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const MainMenuItem = ({ itemName, containerType, openMenuItem, setOpenMenuItem, children }) => {
 
   const handleMouseOver = () => {
-    setIsOpen(true);
+    setOpenMenuItem(itemName);
   };
 
   const handleMouseOut = () => {
-    setIsOpen(false);
+    setOpenMenuItem(null);
   };
 
   const handleHeaderClick = () => {
-    setIsOpen(false);
+    setOpenMenuItem(null);
   };
 
   return (
@@ -24,7 +21,7 @@ const MainMenuItem = ({ itemName, containerType, children }) => {
       <div className="item-header">
         <h2>{itemName}</h2>
       </div>
-      {isOpen && (
+      {openMenuItem === itemName && (
         <div className="sub-menu" onMouseOut={handleMouseOut}>
           <div className="item-header-internal" onClick={handleHeaderClick}>
             <h2>{itemName}</h2>

@@ -29,6 +29,19 @@
 
     box-shadow: var(--standard-box-shadow);
 
+    animation-name: main-menu-item-grow;
+    animation-duration: 0.4s;
+
+    @keyframes main-menu-item-grow {
+      from {
+        margin-top: -100%;
+      }
+    
+      to {
+        margin-top: -100px;
+      }
+    }
+
     .item-header-internal {
       h2 {
         display: inline;
