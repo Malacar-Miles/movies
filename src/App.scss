@@ -7,6 +7,7 @@
   --color-light-grey: rgb(237, 238, 240);
   --color-light-red: #ff564e;
   --color-text-white: #fff;
+  --color-text-yellow: #fefc8f;
   --color-text-black: #2B2B2F;
   --color-text-dark-grey: #363C4C;
   --color-text-light-grey: #999999;
@@ -29,6 +30,24 @@ body {
 .app {
   background-color: var(--color-light-grey);
   padding: 30px;
+}
+
+.arrow-down {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid currentColor;
+  margin-left: 6px;
+}
+
+.arrow-up {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid currentColor;
+  margin-left: 6px;
 }
 
 @media only screen and (max-width: 1000px) {

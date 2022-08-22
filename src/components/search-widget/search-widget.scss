@@ -12,7 +12,7 @@
     }
   }
 
-  .search-widget-inner-content {
+  .search-widget-popup {
     position: fixed;
     top: 0;
     left: 0;
@@ -23,40 +23,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
-    .search-field {
-      border: none;
-      border-radius: 0;
-      padding: 35px 20px;
-      height: 20px;
-      width: 70%;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 16px;
-      outline: none;
-    }
-
-    .search-submit-button {
-      cursor: pointer;
-      border: none;
-      border-radius: 0;
-      color: var(--color-text-white);
-      background-color: var(--color-light-red);
-      width: 70px;
-      height: 70px;
-
-      .search-button-icon {
-        width: 22px;
-        height: 22px;
-      }
-
-      &:hover {
-        background-color: var(--color-text-dark-grey);
-        .search-button-icon {
-          width: 24px;
-          height: 24px;
-        }
-      }
-    }
 
     .search-close-button {
       cursor: pointer;

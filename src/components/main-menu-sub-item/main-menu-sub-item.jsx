@@ -4,11 +4,17 @@ import "./main-menu-sub-item.scss";
 
 import { Link } from "react-router-dom";
 
-const MainMenuSubItem = ({ itemPath, children }) => {
+const MainMenuSubItem = ({ itemPath, children, setIsOpen, mobileMode }) => {
+  const handleClick = () => {
+    // If setIsOpen function has been passes as a prop,
+    // then invoke it upon click in order to close the popup
+    if (setIsOpen) setIsOpen(false);
+  };
+
   return (
-    <div className="menu-sub-item">
+    <div className={`menu-sub-item ${mobileMode && "mobile-mode"}`}>
       <h3>
-        <Link to={itemPath}>{children}</Link>
+        <Link to={itemPath} onClick={handleClick}>{children}</Link>
       </h3>
     </div>
   );

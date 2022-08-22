@@ -5,7 +5,7 @@
   }
 
   h2 {
-    margin: 0;    
+    margin: 0;
     letter-spacing: 0.4rem;
     font-size: 11px;
     font-weight: 600;
@@ -28,7 +28,7 @@
     padding: 74px 20px 30px 20px;
 
     box-shadow: var(--standard-box-shadow);
-    
+
     .item-header-internal {
       h2 {
         display: inline;
@@ -39,7 +39,7 @@
     }
 
     .sub-items-container {
-      margin-top: 30px;      
+      margin-top: 30px;
 
       &.genres {
         display: grid;
@@ -59,28 +59,5 @@
         flex-direction: column;
       }
     }
-
-    .all-movies-button {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      background-color: var(--color-light-red);
-      color: var(--color-text-white);
-      display: flex; 
-      align-items: center;
-      letter-spacing: 0.1rem;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-
-      a {
-        padding: 15px 35px;
-      }
-
-      &:hover {
-        background-color: var(--color-text-dark-grey);
-      }
-    }
   }
 }
-

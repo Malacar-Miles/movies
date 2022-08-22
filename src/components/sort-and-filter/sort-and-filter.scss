@@ -1,3 +1,21 @@
+.sort-and-filter-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -40px;
+  margin-bottom: 40px;
+
+  .toggle {
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    padding-bottom: 3px;
+    border-bottom: 3px solid currentColor;
+    display: flex;
+    align-items: center;
+  }
+}
+
 .sort-and-filter {
   margin-bottom: 40px;
 
@@ -23,7 +41,7 @@
         letter-spacing: 2px;
         padding-bottom: 3px;
         cursor: pointer;
-        
+
         &.selected {
           border-bottom: 4px solid var(--color-text-light-blue);
         }
@@ -50,6 +68,11 @@
       display: flex;
       justify-content: space-between;
       column-gap: 20px;
+
+      &.mobile-mode {
+        flex-direction: column;
+        row-gap: 15px;
+      }
 
       .reset-button {
         cursor: pointer;

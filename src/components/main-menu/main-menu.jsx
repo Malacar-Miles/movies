@@ -2,6 +2,8 @@
 
 import "./main-menu.scss";
 
+import { Link } from "react-router-dom";
+
 import MainMenuItem from "../main-menu-item/main-menu-item";
 import MainMenuSubItem from "../main-menu-sub-item/main-menu-sub-item";
 import SearchWidget from "../search-widget/search-widget";
@@ -24,6 +26,12 @@ const MainMenu = () => {
               {genre}
             </MainMenuSubItem>
           ))
+        }
+        {
+          // Also render an All Movies button.
+          <div className="all-movies-button">
+            <Link to="/genre/all-movies">All Movies</Link>
+          </div>
         }
       </MainMenuItem>
 

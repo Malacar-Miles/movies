@@ -28,4 +28,13 @@
     color: inherit;
     text-decoration: none; 
   }
+
+  &.mobile-mode {
+    h3 {
+      font-size: 14px;
+    }
+    .language-code {
+      display: none;
+    }
+  }
 }
