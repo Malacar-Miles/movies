@@ -8,10 +8,10 @@
   --color-light-red: #ff564e;
   --color-text-white: #fff;
   --color-text-yellow: #fefc8f;
-  --color-text-black: #2B2B2F;
-  --color-text-dark-grey: #363C4C;
+  --color-text-black: #2b2b2f;
+  --color-text-dark-grey: #363c4c;
   --color-text-light-grey: #999999;
-  --color-text-lightest-grey: #CCC;
+  --color-text-lightest-grey: #ccc;
   --color-text-light-blue: #4c51fb;
   --standard-box-shadow: 1px 1px 5px grey;
   --main-section-width--desktop: 964px;
@@ -21,15 +21,21 @@
 body {
   margin: 0;
   padding: 20px;
-  background-color: white;
+  background-color: var(--color-text-white);
   font-family: "Open Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
-.app {
+.background {
   background-color: var(--color-light-grey);
   padding: 30px;
+
+  .app {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 .arrow-down {
@@ -55,13 +61,13 @@ body {
     padding: 0;
   }
 
-  .app {
+  .background {
     padding: 15px;
   }
 }
 
 @media only screen and (max-width: 700px) {
-  .app {
+  .background {
     padding: 8px;
   }
 }

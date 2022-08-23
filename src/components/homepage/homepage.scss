@@ -1,11 +1,17 @@
 .homepage {
+  max-width: var(--main-section-width--desktop);
+  position: relative;
+  color: var(--color-text-black);
+
   .homepage-header {
     font-size: 50px;
     margin-top: 100px;
+    font-weight: 900;
+    letter-spacing: -2px;
   }
   .intro-text {
     font-size: 15px;
-    margin: 100px 0 100px 20%;
+    margin: 100px 0 100px 10%;
     max-width: 400px;
 
     a {

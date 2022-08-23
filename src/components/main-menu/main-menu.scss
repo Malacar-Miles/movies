@@ -1,7 +1,8 @@
 .main-menu {
   width: 80%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  column-gap: 30px;
   align-items: center;
 
   .all-movies-button {

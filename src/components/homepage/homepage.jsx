@@ -2,11 +2,27 @@
 
 import "./homepage.scss";
 
-import MovieList from "../movie-list/movie-list";
+import { useState, useEffect } from "react";
 
-const HomePage = ({ movies }) => {
+import MovieList from "../movie-list/movie-list";
+import DecorativeElement from "../decorative-element/decorative-element";
+import { getAllMoviesFromDatabase } from "../../utils/firebase/firebase";
+
+const HomePage = () => {
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    const getAllMovies = async () => {
+      const allMovies = await getAllMoviesFromDatabase();
+      setMovies(allMovies);
+    };
+
+    getAllMovies();
+  }, []);
+
   return (
     <div className="homepage">
+      <DecorativeElement decoratorType="homepage-decorator" />
       <h1 className="homepage-header">Eastern European Movies</h1>
       <div className="intro-text">
         <p>
@@ -23,8 +39,8 @@ const HomePage = ({ movies }) => {
         <p>
           It's not a 100% faithful copy of the original&nbsp;&mdash; the fonts,
           layouts and animations might differ slightly. My main focus was to
-          reproduce most of the functionality, such as the navigation menus,
-          filters, responsive design, etc.
+          reproduce the app's interactive features, such as the navigation
+          menus, filters, search, responsive design, etc.
         </p>
         <p>
           This site was made with React framework. It uses Google Firestore
