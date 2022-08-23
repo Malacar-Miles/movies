@@ -9,6 +9,7 @@ import { getMovieFromDatabase } from "../../utils/firebase/firebase";
 import { mapCodeToLanguage } from "../../utils/menu-logic/language-codes";
 import { categories } from "../../utils/menu-logic/categories";
 import PageNotFound from "../page-not-found/page-not-found";
+import DecorativeElement from "../decorative-element/decorative-element";
 
 const MoviePage = () => {
   const { movieId } = useParams();
@@ -31,6 +32,7 @@ const MoviePage = () => {
 
     return (
       <div className="movie-page">
+        <DecorativeElement decoratorType="movie-page-decorator" />
         <img
           className="movie-cover"
           src={movie.image}

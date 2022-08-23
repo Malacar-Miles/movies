@@ -24,6 +24,18 @@
     justify-content: center;
     align-items: center;
 
+    animation-name: search-widget-grow;
+    animation-duration: 0.2s;
+    @keyframes search-widget-grow {
+      from {
+        margin-top: -100%;
+      }
+    
+      to {
+        margin-top: 0;
+      }
+    }
+
     .search-close-button {
       cursor: pointer;
       border: none;

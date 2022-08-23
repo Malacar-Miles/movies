@@ -11,10 +11,10 @@ import {
   selectCurrentSortState,
   setSortField,
 } from "../../utils/redux/sort-slice";
-import { useDetectMobileScreenSize } from "../../hooks/detect-mobile-screen-size";
+import { useDetectScreenWidth } from "../../hooks/detect-mobile-screen-size";
 
 const SortAndFilter = ({ categoryId, itemId }) => {
-  const isMobileModeEnabled = useDetectMobileScreenSize();
+  const screenWidth = useDetectScreenWidth();
   const [isFilterBoxOpen, setIsFilterBoxOpen] = useState(false);
 
   const sortState = useSelector(selectCurrentSortState());
@@ -30,7 +30,7 @@ const SortAndFilter = ({ categoryId, itemId }) => {
 
   return (
     <>
-      {isMobileModeEnabled() && (
+      {screenWidth < 1000 && (
         <div className="sort-and-filter-header">
           <span
             className="toggle"
@@ -48,7 +48,7 @@ const SortAndFilter = ({ categoryId, itemId }) => {
       )}
       {
         // Show filter box if either mobile mode is disabled or filter box state is open
-        (!isMobileModeEnabled() || isFilterBoxOpen) && (
+        (screenWidth >= 1000 || isFilterBoxOpen) && (
           <div className="sort-and-filter">
             <div className="sort-box">
               <span className="sort-header">Sort by</span>
@@ -73,7 +73,7 @@ const SortAndFilter = ({ categoryId, itemId }) => {
               <span className="filter-header">Filter by</span>
               <div
                 className={
-                  isMobileModeEnabled()
+                  screenWidth < 1000
                     ? "filter-fields-container mobile-mode"
                     : "filter-fields-container"
                 }
@@ -119,7 +119,7 @@ const SortAndFilter = ({ categoryId, itemId }) => {
                     />
                   )
                 }
-                {!isMobileModeEnabled() && (
+                {screenWidth >= 1000 && (
                   <button
                     className="reset-button"
                     onClick={handleResetButtonClick}

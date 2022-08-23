@@ -2,6 +2,8 @@
   .three-dashes-icon {
     width: 25px;
     height: 25px;
+    margin-right: 20px;
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -21,6 +23,18 @@
     height: 100vh;
     overflow-y: scroll;
     background-color: var(--color-light-red);
+
+    animation-name: fullscreen-popup-grow;
+    animation-duration: 0.4s;
+    @keyframes fullscreen-popup-grow {
+      from {
+        margin-top: -100%;
+      }
+    
+      to {
+        margin-top: 0;
+      }
+    }
 
     .popup-close-button {
       position: absolute;

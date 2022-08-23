@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
-// This hook returns a function which returns true if the browser's window width is less than 1000 (otherwise returns false)
+// This hook returns a function which returns screen width
 
-export const useDetectMobileScreenSize = () => {
+export const useDetectScreenWidth = () => {
   const getWindowSize = () => {
     const { innerWidth, innerHeight } = window;
     return { innerWidth, innerHeight };
@@ -22,5 +22,5 @@ export const useDetectMobileScreenSize = () => {
     };
   }, []);
 
-  return () => windowSize.innerWidth < 1000;
+  return windowSize.innerWidth;
 };

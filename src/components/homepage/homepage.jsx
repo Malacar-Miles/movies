@@ -23,7 +23,6 @@ const HomePage = () => {
   return (
     <div className="homepage">
       <DecorativeElement decoratorType="homepage-decorator" />
-      <h1 className="homepage-header">Eastern European Movies</h1>
       <div className="intro-text">
         <p>
           This site is a partial clone of a commercial movie streaming site{" "}

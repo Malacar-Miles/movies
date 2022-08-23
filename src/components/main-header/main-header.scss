@@ -18,7 +18,7 @@
 }
 
 .main-section {
-  width: var(--main-section-width--desktop);
+  max-width: var(--main-section-width--desktop);
   margin: 0 auto;
 }
 

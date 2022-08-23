@@ -3,16 +3,15 @@
   position: relative;
   color: var(--color-text-black);
 
-  .homepage-header {
-    font-size: 50px;
-    margin-top: 100px;
-    font-weight: 900;
-    letter-spacing: -2px;
-  }
   .intro-text {
     font-size: 15px;
-    margin: 100px 0 100px 10%;
+    margin: 100px 20px 100px 8%;
     max-width: 400px;
+
+    @media only screen and (max-width: 640px) {
+      margin-top: 25px;
+      margin-bottom: 30px;
+    }
 
     a {
       color: inherit;

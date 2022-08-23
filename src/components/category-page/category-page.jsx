@@ -18,6 +18,7 @@ import { resetFilter } from "../../utils/redux/filter-slice";
 import PageNotFound from "../page-not-found/page-not-found";
 import MovieList from "../movie-list/movie-list";
 import SortAndFilter from "../sort-and-filter/sort-and-filter";
+import DecorativeElement from "../decorative-element/decorative-element";
 
 const CategoryPage = () => {
   const { categoryId, itemId } = useParams();
@@ -85,6 +86,7 @@ const CategoryPage = () => {
   if (categoryPageTitle)
     return (
       <div className="category-page">
+        <DecorativeElement decoratorType="category-page-decorator" />
         <h1 className="category-title">
           {categoryPageSubtitle && (
             <span className="category-subtitle">{categoryPageSubtitle}</span>
