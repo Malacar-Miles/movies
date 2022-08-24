@@ -2,6 +2,19 @@
 
 import { useState, useEffect, useRef } from "react";
 
+/**
+ * Returns a random integer between min (inclusive) and max (inclusive).
+ * The value is no lower than min (or the next integer greater than min
+ * if min isn't an integer) and no greater than max (or the next integer
+ * lower than max if max isn't an integer).
+ * Using Math.round() will give you a non-uniform distribution!
+ */
+ function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 const FORWARD = "forward";
 const BACKWARD = "backward";
 
@@ -45,9 +58,12 @@ export const useTypingText = (words, keySpeed = 1000, maxPauseAmount = 10) => {
 
     const backspace = () => {
       if (letterIndex.current === 0) {
-        const isOnLastWord = wordIndex === words.length - 1;
+        // Original code:
+        // const isOnLastWord = wordIndex === words.length - 1;
+        // setWordIndex(!isOnLastWord ? wordIndex + 1 : 0);
 
-        setWordIndex(!isOnLastWord ? wordIndex + 1 : 0);
+        // My change that randomizes the word order:
+        setWordIndex(getRandomInt(0, words.length));
         direction.current = FORWARD;
 
         return;
