@@ -38,7 +38,7 @@ const HomePage = () => {
         <p>
           It's not a 100% faithful copy of the original&nbsp;&mdash; the fonts,
           layouts and animations might differ slightly. My main focus was to
-          reproduce the app's interactive features, such as the navigation
+          reproduce the app's interactive features, such as navigation
           menus, filters, search, responsive design, etc.
         </p>
         <p>
