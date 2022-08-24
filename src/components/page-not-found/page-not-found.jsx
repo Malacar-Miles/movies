@@ -1,11 +1,21 @@
 import "./page-not-found.scss";
 
+import { Link } from "react-router-dom";
+
 const PageNotFound = () => {
   return (
-    <>
-      <h1>404 page not found</h1>
-      <h2>This is a placeholder page</h2>
-    </>
+    <div className="page-not-found">
+      <div className="image-container">
+        <img
+          className="page-not-found-full-image"
+          src="/img/404-full.png"
+          alt="Page not found"
+        />
+      </div>
+      <Link className="link-to-main-page" to="/">
+        Home Page
+      </Link>
+    </div>
   );
 };
 

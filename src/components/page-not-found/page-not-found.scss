@@ -1,0 +1,30 @@
+.page-not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  .image-container {
+    max-width: 634px;
+    max-height: 351px;
+    overflow: hidden;
+    .page-not-found-full-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  .link-to-main-page {
+    color: var(--color-text-light-blue);
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    text-decoration: none;
+    border-bottom: 2px solid currentColor;
+    padding-bottom: 4px;
+    margin-top: 100px;
+  }
+}
