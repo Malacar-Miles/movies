@@ -36,35 +36,38 @@ const DecorativeElement = ({ decoratorType }) => {
   // This flag enables the display of decorative polygons on all pages
   const enableDecorators = screenWidth >= 640;
 
+  // Set inline styles for decorative elements because setting background images via SCSS doesn't work
+  const redPolygonStyle = {
+    background: "url(/img/red-polygon.png)",
+    backgroundSize: "contain",
+  };
+  const whitePolygonStyle = {
+    background: "url(/img/white-polygon.png)",
+    backgroundSize: "contain",
+  };
+  const girlStyle = {
+    background: "url(/img/girl.png)",
+    backgroundSize: "contain",
+  };
+  const bigWhitePolygonStyle = {
+    background: "url(/img/white-polygon-big.png)",
+    backgroundSize: "contain",
+  };
+
   // Do the calculations only if we'll need the results
-  let polygonOffset = null,
-    polygonStyle = null,
-    whitePolygonStyle = null,
-    girlStyle = null,
-    headerStyle = null,
-    subHeaderStyle = null;
+  let headerStyle = null, subHeaderStyle = null;
   if (enableDecoratorMovement) {
     // Calculate the offset we will set for the polygon based on relativePosition
-    polygonOffset = {
+    let polygonOffset = {
       x: Math.round((relativePosition.x - 0.5) * 20) * -1,
       y: Math.round((relativePosition.y - 0.5) * 20),
     };
 
-    // Create a style object to give offset to the polygon
-    polygonStyle = {
-      transform: `translate3d(${polygonOffset.x}px, ${polygonOffset.y}px, 0px)`,
-    };
-    whitePolygonStyle = 
-    {
-      transform: `translate3d(${polygonOffset.x * -1}px, ${polygonOffset.y}px, 0px)`,
-    };
-
-    // Create a style object to give offset to the girl (the opposite from the poligon offset)
-    girlStyle = {
-      transform: `translate3d(${polygonOffset.x * -1}px, ${
-        polygonOffset.y * -1
-      }px, 0px)`,
-    };
+    // Add dynamically calculated offset to each decorator's style
+    redPolygonStyle.transform = `translate3d(${polygonOffset.x}px, ${polygonOffset.y}px, 0px)`;
+    whitePolygonStyle.transform = `translate3d(${polygonOffset.x * -1}px, ${polygonOffset.y}px, 0px)`;
+    bigWhitePolygonStyle.transform = whitePolygonStyle.transform;
+    girlStyle.transform = `translate3d(${polygonOffset.x * -1}px, ${polygonOffset.y * -1}px, 0px)`;
 
     // Create a style object to give offset to the homepage header (only moves horizontally)
     headerStyle = {
@@ -83,20 +86,16 @@ const DecorativeElement = ({ decoratorType }) => {
       {decoratorType === "homepage-decorator" && (
         <>
           {enableDecorators && (
-            <img
+            <div
               className="decorative-image-red-poligon"
-              src="/img/red-polygon.png"
-              alt=""
-              style={polygonStyle}
-            ></img>
+              style={redPolygonStyle}
+            ></div>
           )}
           {enableRichDecorators && (
-            <img
+            <div
               className="decorative-image-girl"
-              src="/img/girl.png"
-              alt=""
               style={girlStyle}
-            ></img>
+            ></div>
           )}
           <h1 className="homepage-header" style={headerStyle}>
             Eastern European Movies
@@ -112,21 +111,17 @@ const DecorativeElement = ({ decoratorType }) => {
       )}
 
       {(decoratorType === "category-page-decorator" && screenWidth > 722) && (
-        <img
+        <div
           className="decorative-image-white-poligon"
-          src="/img/white-polygon.png"
-          alt=""
           style={whitePolygonStyle}
-        ></img>
+        ></div>
       )}
 
       {(decoratorType === "movie-page-decorator" && screenWidth > 1060) && (
-        <img
+        <div
           className="decorative-image-white-poligon-big"
-          src="/img/white-polygon-big.png"
-          alt=""
-          style={whitePolygonStyle}
-        ></img>
+          style={bigWhitePolygonStyle}
+        ></div>
       )}
     </>
   );

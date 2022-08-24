@@ -30,6 +30,7 @@ const MainMenu = () => {
             <MainMenuSubItem
               key={index}
               itemPath={"/genre/" + mapGenreToId[genre]}
+              setIsOpen={setOpenMenuItem}
             >
               {genre}
             </MainMenuSubItem>
@@ -38,7 +39,14 @@ const MainMenu = () => {
         {
           // Also render All Movies button.
           <div className="all-movies-button">
-            <Link to="/genre/all-movies">All Movies</Link>
+            <Link
+              to="/genre/all-movies"
+              onClick={() => {
+                setOpenMenuItem(null);
+              }}
+            >
+              All Movies
+            </Link>
           </div>
         }
       </MainMenuItem>
@@ -55,6 +63,7 @@ const MainMenu = () => {
             <MainMenuSubItem
               key={index}
               itemPath={"/country/" + country.toLowerCase()}
+              setIsOpen={setOpenMenuItem}
             >
               {country}
             </MainMenuSubItem>
@@ -74,6 +83,7 @@ const MainMenu = () => {
             <MainMenuSubItem
               key={index}
               itemPath={"/subtitles_languages/" + language.toLowerCase()}
+              setIsOpen={setOpenMenuItem}
             >
               <span className="language-code">
                 {mapLanguageToCode[language] + " "}
@@ -93,7 +103,11 @@ const MainMenu = () => {
         {
           // Render a menu sub-item for each entry in the allDecadesArray
           allDecadesArray.map((decade) => (
-            <MainMenuSubItem key={decade} itemPath={"/decades/" + decade}>
+            <MainMenuSubItem
+              key={decade}
+              itemPath={"/decades/" + decade}
+              setIsOpen={setOpenMenuItem}
+            >
               {decade}
             </MainMenuSubItem>
           ))

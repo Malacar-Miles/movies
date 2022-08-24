@@ -8,7 +8,7 @@ const MainMenuSubItem = ({ itemPath, children, setIsOpen, mobileMode }) => {
   const handleClick = () => {
     // If setIsOpen function has been passes as a prop,
     // then invoke it upon click in order to close the popup
-    if (setIsOpen) setIsOpen(false);
+    if (setIsOpen) setIsOpen(null);
   };
 
   return (
