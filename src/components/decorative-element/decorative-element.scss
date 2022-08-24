@@ -40,12 +40,13 @@
   margin-right: 20px;
   margin-bottom: 0;
   font-weight: 900;
-  letter-spacing: -2px;
+  letter-spacing: -3px;
 }
 
 .homepage-subheader {
   display: block;
   font-size: 38px;
+  letter-spacing: -2px;
   font-weight: bold;
   margin-left: 250px;
   color: white;
@@ -68,6 +69,7 @@
     font-size: 25px;
     margin-left: 8%;
     margin-bottom: 0;
+    letter-spacing: -1px;
     color: var(--color-text-dark-grey);
   }
 }
