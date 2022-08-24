@@ -63,7 +63,7 @@ export const useTypingText = (words, keySpeed = 1000, maxPauseAmount = 10) => {
         // setWordIndex(!isOnLastWord ? wordIndex + 1 : 0);
 
         // My change that randomizes the word order:
-        setWordIndex(getRandomInt(0, words.length));
+        setWordIndex(getRandomInt(0, words.length - 1));
         direction.current = FORWARD;
 
         return;
