@@ -18,6 +18,10 @@
   --width-mobile-breakpoint: 1000px; /* This is just for my reference, as CSS variables can't be used in @media queries */
 }
 
+img {
+  display: block;
+}
+
 body {
   margin: 0;
   padding: 20px;
@@ -31,6 +35,7 @@ body {
 .background {
   background-color: var(--color-light-grey);
   padding: 30px;
+  min-height: 95vh;
 
   .app {
     position: relative;

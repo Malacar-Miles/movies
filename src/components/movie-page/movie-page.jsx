@@ -138,7 +138,7 @@ const MoviePage = () => {
       </div>
     );
   } else if (movie === null) return <PageNotFound />;
-  else return null; // This should trigger if movie is undefined
+  else return null; // This should trigger if movie === undefined
 };
 
 export default MoviePage;
