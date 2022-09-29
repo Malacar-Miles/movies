@@ -1,5 +1,5 @@
   // This object contains valid values for :categoryId in the URL
-  export const categories = {
+  export const categories: Record<string, string> = {
     genre: "genre",
     country: "country",
     subtitles: "subtitles_languages",

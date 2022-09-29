@@ -1,14 +1,13 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 
-// eslint-disable-next-line
-import { getFirestore, doc, addDoc, getDoc, setDoc, updateDoc, collection, query, getDocs, where, FieldValue } from "firebase/firestore";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, query, getDocs, where } from "firebase/firestore";
 
 import { categories } from "../menu-logic/categories";
 import { toTitleCase } from "../menu-logic/helper-functions";
 import { mapIdToGenre } from "../menu-logic/genres";
 import { mapLanguageToCode } from "../menu-logic/language-codes";
 import { decadeBoundaries } from "../menu-logic/decades";
+import { movie } from "../types/types";
 
 // My web app's Firebase configuration
 const firebaseConfig = {
@@ -27,30 +26,30 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // Write an object that contains movie data into the Firestore database
-export const addMovieToDatabase = async (movie) => {
+export const addMovieToDatabase = async (movie: movie) => {
   try {
     // Write this object into the "movies" collection and use movie.id as the Firestore document id
     await setDoc(doc(db, "movies", movie.id), movie);
     console.log("Successfully added a movie to the database");
   } catch (error) {
-    console.log("Failed to upload specific movie data to DB: ", error.message);
+    if (error instanceof Error) console.log("Failed to upload specific movie data to DB: ", error.message);
   }
 };
 
 // Get all movie documents from Firestore and return them as an array of objects
 export const getAllMoviesFromDatabase = async () => {
+  const results: movie[] = [];
   try {
     const querySnapshot = await getDocs(collection(db, "movies"));
-    const results = [];
-    querySnapshot.forEach(movie => results.push(movie.data()));
-    return results;
+    querySnapshot.forEach(movie => results.push(movie.data() as movie));
   } catch (error) {
-    console.log("Failed to fetch all movie data from DB: ", error.message);
+    if (error instanceof Error) console.log("Failed to fetch all movie data from DB: ", error.message);
   }
+  return results;
 };
 
 // Get get a filtered subset of movie documents from Firestore and return it as an array of objects
-export const getMoviesByCategoryFromDatabase = async (categoryId, itemId) => {
+export const getMoviesByCategoryFromDatabase = async (categoryId: string, itemId: string) => {
   try {
     let q;
     const moviesCollection = collection(db, "movies");
@@ -75,18 +74,18 @@ export const getMoviesByCategoryFromDatabase = async (categoryId, itemId) => {
         throw new Error("Invalid categoryId");
     }
     const querySnapshot = await getDocs(q);
-    const results = [];
-    querySnapshot.forEach(movie => results.push(movie.data()));
+    const results: movie[] = [];
+    querySnapshot.forEach(movie => results.push(movie.data() as movie));
     return results;
   } catch (error) {
-    console.log("Failed to fetch filtered movie data from DB: ", error.message);
+    if (error instanceof Error) console.log("Failed to fetch filtered movie data from DB: ", error.message);
   }
 };
 
 // Get all movie documents from Firestore, then filter them, returning only those whose titles match the search query.
 // This is inefficient, but Firestore doesn't support searching by substrings.
-export const searchAllMoviesFromDatabase = async (searchQuery) => {
-  const searchForSubstring = (stringToCheck, subString) => {
+export const searchAllMoviesFromDatabase = async (searchQuery: string) => {
+  const searchForSubstring = (stringToCheck: string, subString: string) => {
     // This is a helper function that returns true if stringToCheck contains every word from subString
     const wordsToCheck = stringToCheck.toLowerCase().split(" ");
     const wordsFromSubString = subString.toLowerCase().split(" ");
@@ -99,19 +98,19 @@ export const searchAllMoviesFromDatabase = async (searchQuery) => {
 
   try {
     const querySnapshot = await getDocs(collection(db, "movies"));
-    const results = [];
-    querySnapshot.forEach((movie) => results.push(movie.data()));
+    const results: movie[] = [];
+    querySnapshot.forEach((movie) => results.push(movie.data() as movie));
     const filteredResults = results.filter((movie) =>
       searchForSubstring(movie.title, searchQuery)
     );
     return filteredResults;
   } catch (error) {
-    console.log("Failed to fetch all movie data from DB for searching: ", error.message);
+    if (error instanceof Error) console.log("Failed to fetch all movie data from DB for searching: ", error.message);
   }
 };
 
 // Get a movie document with a specific id from Firestore, return it as a movie object and update the viewcount
-export const getMovieFromDatabase = async (movieId) => {
+export const getMovieFromDatabase = async (movieId: string) => {
   try {
     const movieDocRef = doc(db, "movies", movieId);
     const movieDocument = await getDoc(movieDocRef);
@@ -126,6 +125,6 @@ export const getMovieFromDatabase = async (movieId) => {
     // If the document doesn't exist, return null
     else return null;
   } catch (error) {
-    console.log("Failed to fetch specific movie data from DB: ", error.message);
+    if (error instanceof Error) console.log("Failed to fetch specific movie data from DB: ", error.message);
   }
 };

@@ -1,6 +1,6 @@
 export const minDecade = 1930, maxDecade = 2010;
 
-export const decadeBoundaries = (inputYearString) => {
+export const decadeBoundaries = (inputYearString: string) => {
   const inputYear = Number(inputYearString);
 
   // Validate input

@@ -1,5 +1,5 @@
 This site is a partial clone of a commercial movie streaming site easterneuropeanmovies.com. I've made it as a student portfolio project.
-- Technologies used: React, Redux, SASS
+- Technologies used: React, Redux, SASS, TypeScript
 - External APIs used: Google Firebase/Firestore
 - Responsive design implemented on each page. Separate navigation/search menu for mobile mode
 - A complex Sort and Filter widget stores all its state data in Redux

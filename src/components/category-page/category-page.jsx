@@ -19,6 +19,7 @@ import PageNotFound from "../page-not-found/page-not-found";
 import MovieList from "../movie-list/movie-list";
 import SortAndFilter from "../sort-and-filter/sort-and-filter";
 import DecorativeElement from "../decorative-element/decorative-element";
+import { movie } from "../../utils/types/types";
 
 const CategoryPage = () => {
   const { categoryId, itemId } = useParams();

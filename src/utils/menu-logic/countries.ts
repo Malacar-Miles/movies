@@ -1,4 +1,4 @@
-export const mapCountryNounToAdjective = {
+export const mapCountryNounToAdjective: Record<string, string> = {
   "Bulgaria": "Bulgarian",
   "Czechoslovakia": "Czechoslovak",
   "Estonia": "Estonian",

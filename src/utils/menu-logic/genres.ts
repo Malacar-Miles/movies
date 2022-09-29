@@ -1,7 +1,7 @@
 import { reverseMap } from "./helper-functions"
 
 // Map a genre ID that's used in the URL to a string that's shown in the UI
-export const mapIdToGenre = {
+export const mapIdToGenre: Record<string, string> = {
   "comedy": "Comedy",
   "melodrama": "Romance",
   "drama": "Drama",

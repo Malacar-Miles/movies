@@ -1,4 +1,6 @@
-export const moviesJSON = [
+import { movie } from "../types/types"
+
+export const moviesJSON: movie[] = [
   {
     "title": "On the Silver Globe",
     "id": "on-the-silver-globe",
@@ -8,7 +10,7 @@ export const moviesJSON = [
     "language": ["Polish"],
     "imdbRating": 7.3,
     "views": 0,
-    "year": "1988",
+    "year": 1988,
     "genre": ["Adventure", "Fantasy"],
     "subs": ["EN", "PT", "RU"],
     "director": ["Andrzej Zulawski"],

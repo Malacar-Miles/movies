@@ -1,6 +1,6 @@
 import { reverseMap } from "./helper-functions"
 
-export const mapCodeToLanguage = {
+export const mapCodeToLanguage: Record<string, string> = {
   "AF": "Afrikaans",
   "AR": "Arabic",
   "EU": "Basque",
