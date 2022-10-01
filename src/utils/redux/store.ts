@@ -8,3 +8,5 @@ export const store = configureStore({
     sort: sortReducer
   },
 })
+
+export type rootState = ReturnType<typeof store.getState>

@@ -4,12 +4,12 @@ import { mapCountryNounToAdjective } from "./countries";
 import { allDecadesArray } from "./decades";
 import { movie } from "../types/types";
 
-type numberOrString = number | string;
-type filterField = {
+export type numberOrString = number | string;
+export type filterField = {
   fieldPossibleValues: numberOrString[];
   fieldCurrentValues: numberOrString[];
 };
-type filter = {
+export type filter = {
   subs: filterField;
   genre: filterField;
   country: filterField;

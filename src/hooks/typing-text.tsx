@@ -9,7 +9,7 @@ import { useState, useEffect, useRef } from "react";
  * lower than max if max isn't an integer).
  * Using Math.round() will give you a non-uniform distribution!
  */
- function getRandomInt(min, max) {
+function getRandomInt(min: number, max: number) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -23,13 +23,17 @@ const BACKWARD = "backward";
  * https://letsbuildui.dev/articles/a-typing-text-effect-with-react-hooks
  */
 
-export const useTypingText = (words, keySpeed = 1000, maxPauseAmount = 10) => {
+export const useTypingText = (
+  words: string[],
+  keySpeed = 1000,
+  maxPauseAmount = 10
+) => {
   const [wordIndex, setWordIndex] = useState(0);
   const [currentWord, setCurrentWord] = useState(words[wordIndex].split(""));
   const [isStopped, setIsStopped] = useState(false);
   const direction = useRef(BACKWARD);
-  const typingInterval = useRef();
-  const letterIndex = useRef();
+  const typingInterval = useRef<NodeJS.Timer>();
+  const letterIndex = useRef<number>();
 
   const stop = () => {
     clearInterval(typingInterval.current);
@@ -43,7 +47,10 @@ export const useTypingText = (words, keySpeed = 1000, maxPauseAmount = 10) => {
     if (isStopped) return;
 
     const typeLetter = () => {
-      if (letterIndex.current >= words[wordIndex].length) {
+      if (
+        letterIndex.current !== undefined &&
+        letterIndex.current >= words[wordIndex].length
+      ) {
         direction.current = BACKWARD;
 
         // Begin pause by setting the maxPauseAmount prop equal to the counter
@@ -52,8 +59,10 @@ export const useTypingText = (words, keySpeed = 1000, maxPauseAmount = 10) => {
       }
 
       const segment = words[wordIndex].split("");
-      setCurrentWord(currentWord.concat(segment[letterIndex.current]));
-      letterIndex.current = letterIndex.current + 1;
+      if (letterIndex.current !== undefined) {
+        setCurrentWord(currentWord.concat(segment[letterIndex.current]));
+        letterIndex.current = letterIndex.current + 1;
+      }
     };
 
     const backspace = () => {
@@ -100,6 +109,6 @@ export const useTypingText = (words, keySpeed = 1000, maxPauseAmount = 10) => {
       </span>
     ),
     start: () => setIsStopped(false),
-    stop
+    stop,
   };
 };
