@@ -72,7 +72,14 @@ export const useTypingText = (
         // setWordIndex(!isOnLastWord ? wordIndex + 1 : 0);
 
         // My change that randomizes the word order:
-        setWordIndex(getRandomInt(0, words.length - 1));
+        let newWordIndex: number; 
+        while (true) {
+          // Reroll newWordIndex if it happens to be the same as WordIndex,
+          // so that we don't type the same word twice in a row.
+          newWordIndex = getRandomInt(0, words.length - 1);
+          if (newWordIndex !== wordIndex) break;
+        }
+        setWordIndex(newWordIndex);
         direction.current = FORWARD;
 
         return;

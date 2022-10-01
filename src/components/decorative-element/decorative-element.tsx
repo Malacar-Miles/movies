@@ -5,13 +5,13 @@ import { useState, useEffect } from "react";
 import { useDetectScreenWidth } from "../../hooks/detect-mobile-screen-size";
 import DynamicText from "../dynamic-text/dynamic-text";
 
-const DecorativeElement = ({ decoratorType }) => {
+const DecorativeElement = ({ decoratorType }: { decoratorType: string }) => {
   const screenWidth = useDetectScreenWidth();
   const [relativePosition, setRelativePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    const handleWindowMouseMove = (moveEvent) => {
-      // Calculate the relative position of cursor on the screen
+    const handleWindowMouseMove = (moveEvent: MouseEvent) => {
+      // Calculate the relative position of the cursor on the screen
       // x === 0 means the cursor is in the leftmost position,
       // x === 1 means it's in the rightmost position.
       const { clientX, clientY } = moveEvent;
@@ -40,43 +40,52 @@ const DecorativeElement = ({ decoratorType }) => {
   const redPolygonStyle = {
     background: "url(/img/red-polygon.png)",
     backgroundSize: "contain",
+    transform: "none"
   };
   const whitePolygonStyle = {
     background: "url(/img/white-polygon.png)",
     backgroundSize: "contain",
+    transform: "none"
   };
   const girlStyle = {
     background: "url(/img/girl.png)",
     backgroundSize: "contain",
+    transform: "none"
   };
   const bigWhitePolygonStyle = {
     background: "url(/img/white-polygon-big.png)",
     backgroundSize: "contain",
+    transform: "none"
   };
 
   // Do the calculations only if we'll need the results
-  let headerStyle = null, subHeaderStyle = null;
+  let headerStyle = undefined,
+    subHeaderStyle = undefined;
   if (enableDecoratorMovement) {
-    // Calculate the offset we will set for the polygon based on relativePosition
-    let polygonOffset = {
+    // Calculate the base offset we will use to set the styles of multiple elements
+    let baseOffset = {
       x: Math.round((relativePosition.x - 0.5) * 20) * -1,
       y: Math.round((relativePosition.y - 0.5) * 20),
     };
 
     // Add dynamically calculated offset to each decorator's style
-    redPolygonStyle.transform = `translate3d(${polygonOffset.x}px, ${polygonOffset.y}px, 0px)`;
-    whitePolygonStyle.transform = `translate3d(${polygonOffset.x * -1}px, ${polygonOffset.y}px, 0px)`;
+    redPolygonStyle.transform = `translate3d(${baseOffset.x}px, ${baseOffset.y}px, 0px)`;
+    whitePolygonStyle.transform = `translate3d(${baseOffset.x * -1}px, ${
+      baseOffset.y
+    }px, 0px)`;
     bigWhitePolygonStyle.transform = whitePolygonStyle.transform;
-    girlStyle.transform = `translate3d(${polygonOffset.x * -1}px, ${polygonOffset.y * -1}px, 0px)`;
+    girlStyle.transform = `translate3d(${baseOffset.x * -1}px, ${
+      baseOffset.y * -1
+    }px, 0px)`;
 
     // Create a style object to give offset to the homepage header (only moves horizontally)
     headerStyle = {
-      transform: `translate3d(${polygonOffset.x * -1}px, 0px, 0px)`,
+      transform: `translate3d(${baseOffset.x * -1}px, 0px, 0px)`,
     };
 
     // Create a style object to give offset to the homepage subheader (the opposite from header, moves faster)
     subHeaderStyle = {
-      transform: `translate3d(${polygonOffset.x * 2}px, 0px, 0px)`,
+      transform: `translate3d(${baseOffset.x * 2}px, 0px, 0px)`,
     };
   }
 
@@ -92,10 +101,7 @@ const DecorativeElement = ({ decoratorType }) => {
             ></div>
           )}
           {enableRichDecorators && (
-            <div
-              className="decorative-image-girl"
-              style={girlStyle}
-            ></div>
+            <div className="decorative-image-girl" style={girlStyle}></div>
           )}
           <h1 className="homepage-header" style={headerStyle}>
             Eastern European Movies
@@ -110,14 +116,14 @@ const DecorativeElement = ({ decoratorType }) => {
         </>
       )}
 
-      {(decoratorType === "category-page-decorator" && screenWidth > 722) && (
+      {decoratorType === "category-page-decorator" && screenWidth > 722 && (
         <div
           className="decorative-image-white-poligon"
           style={whitePolygonStyle}
         ></div>
       )}
 
-      {(decoratorType === "movie-page-decorator" && screenWidth > 1060) && (
+      {decoratorType === "movie-page-decorator" && screenWidth > 1060 && (
         <div
           className="decorative-image-white-poligon-big"
           style={bigWhitePolygonStyle}

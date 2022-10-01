@@ -1,6 +1,6 @@
 import "./filter-field.scss";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import FilterFieldValue from "../filter-field-value/filter-field-value";
@@ -10,8 +10,17 @@ import {
   selectFieldCurrentValues,
   selectFieldPossibleValues,
 } from "../../utils/redux/filter-slice";
+import { numberOrString } from "../../utils/menu-logic/filter";
 
-const FilterField = ({ fieldName, fieldDisplayName, fieldPlaceholderText }) => {
+const FilterField = ({
+  fieldName,
+  fieldDisplayName,
+  fieldPlaceholderText,
+}: {
+  fieldName: string;
+  fieldDisplayName: string;
+  fieldPlaceholderText: string;
+}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const dispatch = useDispatch();
@@ -19,11 +28,11 @@ const FilterField = ({ fieldName, fieldDisplayName, fieldPlaceholderText }) => {
   const fieldCurrentValues = useSelector(selectFieldCurrentValues(fieldName));
   const fieldPossibleValues = useSelector(selectFieldPossibleValues(fieldName));
 
-  const fieldAddValue = (fieldName, newValue) => {
+  const fieldAddValue = (fieldName: string, newValue: numberOrString) => {
     dispatch(addValueToField({ fieldName: fieldName, newValue: newValue }));
   };
 
-  const fieldRemoveValue = (fieldName, valueToRemove) => {
+  const fieldRemoveValue = (fieldName: string, valueToRemove: numberOrString) => {
     dispatch(
       removeValueFromField({
         fieldName: fieldName,
@@ -36,8 +45,8 @@ const FilterField = ({ fieldName, fieldDisplayName, fieldPlaceholderText }) => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleMenuItemClick = (clickEvent) => {
-    const clickedItemName = clickEvent.target.innerText;
+  const handleMenuItemClick = (clickEvent: React.MouseEvent<HTMLElement>) => {
+    const clickedItemName = (clickEvent.target as HTMLElement).innerText;
     setIsMenuOpen(false);
     fieldAddValue(fieldName, clickedItemName);
   };

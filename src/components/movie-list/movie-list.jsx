@@ -20,15 +20,17 @@ const MovieList = ({ movies, enableFilter }) => {
   }
 
   // If movies array exists: (if it's not empty, show the movies, else show the message)
-  if (movies) return movies.length > 0 ? (
-    <div className="movie-list">
-      {movies.map((movie) => (
-        <MovieCard key={movie.id} movie={movie} />
-      ))}
-    </div>
-  ) : (
-    <span className="no-movies-found">No Movies Found :(</span>
-  );
+  if (movies) {
+    return movies.length > 0 ? (
+      <div className="movie-list">
+        {movies.map((movie) => (
+          <MovieCard key={movie.id} movie={movie} />
+        ))}
+      </div>
+    ) : (
+      <span className="no-movies-found">No Movies Found :(</span>
+    );
+  } else return <></>;
 };
 
 export default MovieList;
