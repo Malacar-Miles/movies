@@ -1,6 +1,6 @@
 import "./search-widget.scss";
 
-import { useState } from "react";
+import React, { useState } from "react";
 
 import { ReactComponent as SearchIcon } from "../../assets/search-icon.svg";
 import SearchBar from "../search-bar/search-bar";
@@ -12,7 +12,7 @@ const SearchWidget = () => {
     setIsSearchBoxOpen(true);
   };
 
-  const handleCloseButtonClick = (clickEvent) => {
+  const handleCloseButtonClick = (clickEvent: React.MouseEvent<HTMLButtonElement>) => {
     clickEvent.preventDefault();
     setIsSearchBoxOpen(false);
   };
@@ -22,7 +22,7 @@ const SearchWidget = () => {
       <SearchIcon className="search-icon" onClick={handleSearchIconClick} />
       {isSearchBoxOpen && (
         <div className="search-widget-popup">
-          <SearchBar setIsOpen={setIsSearchBoxOpen} />      
+          <SearchBar setIsPopupOpen={setIsSearchBoxOpen} />      
           <button
             className="search-close-button"
             onClick={handleCloseButtonClick}

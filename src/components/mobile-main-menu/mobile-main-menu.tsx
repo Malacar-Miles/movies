@@ -49,14 +49,14 @@ const MobileMainMenu = () => {
             &#10006;
           </button>
           <div className="popup-content">
-            <SearchBar setIsOpen={setIsPopupOpen} mobileMode />
+            <SearchBar setIsPopupOpen={setIsPopupOpen} mobileMode />
 
             <MobileMainMenuItem itemName="Genre">
               {
                 // Render a menu sub-item for each entry in the mapGenreToId object
                 Object.keys(mapGenreToId).map((genre, index) => (
                   <MainMenuSubItem
-                    setIsOpen={setIsPopupOpen}
+                    setIsPopupOpen={setIsPopupOpen}
                     key={index}
                     itemPath={"/genre/" + mapGenreToId[genre]}
                     mobileMode
@@ -69,7 +69,7 @@ const MobileMainMenu = () => {
                 // Also render All Movies link
                 <MainMenuSubItem
                   itemPath="/genre/all-movies"
-                  setIsOpen={setIsPopupOpen}
+                  setIsPopupOpen={setIsPopupOpen}
                   mobileMode
                 >
                   All Movies
@@ -84,7 +84,7 @@ const MobileMainMenu = () => {
                   <MainMenuSubItem
                     key={index}
                     itemPath={"/country/" + country.toLowerCase()}
-                    setIsOpen={setIsPopupOpen}
+                    setIsPopupOpen={setIsPopupOpen}
                     mobileMode
                   >
                     {country}
@@ -100,7 +100,7 @@ const MobileMainMenu = () => {
                   <MainMenuSubItem
                     key={index}
                     itemPath={"/subtitles_languages/" + language.toLowerCase()}
-                    setIsOpen={setIsPopupOpen}
+                    setIsPopupOpen={setIsPopupOpen}
                     mobileMode
                   >
                     <span className="language-code">
@@ -119,7 +119,7 @@ const MobileMainMenu = () => {
                   <MainMenuSubItem
                     key={decade}
                     itemPath={"/decades/" + decade}
-                    setIsOpen={setIsPopupOpen}
+                    setIsPopupOpen={setIsPopupOpen}
                     mobileMode
                   >
                     {decade}

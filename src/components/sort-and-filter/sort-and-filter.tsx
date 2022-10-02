@@ -13,7 +13,13 @@ import {
 } from "../../utils/redux/sort-slice";
 import { useDetectScreenWidth } from "../../hooks/detect-mobile-screen-size";
 
-const SortAndFilter = ({ categoryId, itemId }) => {
+const SortAndFilter = ({
+  categoryId,
+  itemId,
+}: {
+  categoryId: string | undefined;
+  itemId: string | undefined;
+}) => {
   const screenWidth = useDetectScreenWidth();
   const [isFilterBoxOpen, setIsFilterBoxOpen] = useState(false);
 
@@ -57,11 +63,17 @@ const SortAndFilter = ({ categoryId, itemId }) => {
                   <div
                     key={index}
                     className={
-                      sortFields[field] === sortState
+                      sortFields[field as keyof typeof sortFields] === sortState
                         ? "sort-field selected"
                         : "sort-field"
                     }
-                    onClick={() => dispatch(setSortField(sortFields[field]))}
+                    onClick={() =>
+                      dispatch(
+                        setSortField(
+                          sortFields[field as keyof typeof sortFields]
+                        )
+                      )
+                    }
                   >
                     {field}
                   </div>

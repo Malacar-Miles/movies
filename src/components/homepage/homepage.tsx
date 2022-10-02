@@ -7,9 +7,10 @@ import { useState, useEffect } from "react";
 import MovieList from "../movie-list/movie-list";
 import DecorativeElement from "../decorative-element/decorative-element";
 import { getAllMoviesFromDatabase } from "../../utils/firebase/firebase";
+import { movie } from "../../utils/types/types";
 
 const HomePage = () => {
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState<movie[]>([]);
 
   useEffect(() => {
     const getAllMovies = async () => {
@@ -54,7 +55,7 @@ const HomePage = () => {
           for reference.
         </p>
       </div>
-      <MovieList movies={movies} />
+      <MovieList movies={movies} enableFilter={false} />
     </div>
   );
 };

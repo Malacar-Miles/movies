@@ -14,7 +14,7 @@ import { allDecadesArray } from "../../utils/menu-logic/decades";
 import { mapLanguageToCode } from "../../utils/menu-logic/language-codes";
 
 const MainMenu = () => {
-  const [openMenuItem, setOpenMenuItem] = useState(null);
+  const [openMenuItem, setOpenMenuItem] = useState<string | null>(null);
 
   return (
     <nav className="main-menu">

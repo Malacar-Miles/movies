@@ -8,7 +8,13 @@ import "./mobile-main-menu-item.scss";
 
 import { useState } from "react";
 
-const MobileMainMenuItem = ({ itemName, children }) => {
+const MobileMainMenuItem = ({
+  itemName,
+  children,
+}: {
+  itemName: string;
+  children: React.ReactNode;
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleHeaderClick = () => {

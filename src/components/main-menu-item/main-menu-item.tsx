@@ -2,8 +2,19 @@
 
 import "./main-menu-item.scss";
 
-const MainMenuItem = ({ itemName, containerType, openMenuItem, setOpenMenuItem, children }) => {
-
+const MainMenuItem = ({
+  itemName,
+  containerType,
+  openMenuItem,
+  setOpenMenuItem,
+  children,
+}: {
+  itemName: string;
+  containerType: string;
+  openMenuItem: string | null;
+  setOpenMenuItem: React.Dispatch<React.SetStateAction<string | null>>;
+  children: React.ReactNode;
+}) => {
   const handleMouseOver = () => {
     setOpenMenuItem(itemName);
   };

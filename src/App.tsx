@@ -2,7 +2,7 @@ import "./App.scss";
 
 import { Route, Routes } from "react-router-dom";
 
-import MainHeader from "./components/main-header/main-header.jsx";
+import MainHeader from "./components/main-header/main-header";
 import HomePage from "./components/homepage/homepage";
 import MoviePage from "./components/movie-page/movie-page";
 import CategoryPage from "./components/category-page/category-page";
