@@ -9,7 +9,13 @@ import { selectCurrentFilter } from "../../utils/redux/filter-slice";
 import { Movie } from "../../utils/types/types";
 
 // Take an array of movie objects and render it as a list of MovieCard items
-const MovieList = ({ movies, enableFilter } : { movies: Movie[] | null; enableFilter?: boolean }) => {
+const MovieList = ({
+  movies,
+  enableFilter,
+}: {
+  movies: Movie[] | null;
+  enableFilter?: boolean;
+}) => {
   // Get all filter field values from Redux
   const allFilterFieldValues = useSelector(selectCurrentFilter());
   const sortState = useSelector(selectCurrentSortState());
@@ -20,7 +26,8 @@ const MovieList = ({ movies, enableFilter } : { movies: Movie[] | null; enableFi
     movies = sortMovieList(movies, sortState as keyof Movie);
   }
 
-  // If movies array exists: (if it's not empty, show the movies, else show the message)
+  // If movies array exists: if it's not empty, show the movies, else show the message.
+  // If movies === null, show connection error message.
   if (movies) {
     return movies.length > 0 ? (
       <div className="movie-list">

@@ -10,14 +10,14 @@ import {
   selectFieldCurrentValues,
   selectFieldPossibleValues,
 } from "../../utils/redux/filter-slice";
-import { NumberOrString } from "../../utils/menu-logic/filter";
+import { Filter, NumberOrString } from "../../utils/menu-logic/filter";
 
 const FilterField = ({
   fieldName,
   fieldDisplayName,
   fieldPlaceholderText,
 }: {
-  fieldName: string;
+  fieldName: keyof Filter;
   fieldDisplayName: string;
   fieldPlaceholderText: string;
 }) => {

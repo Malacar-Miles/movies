@@ -10,7 +10,7 @@ import { getAllMoviesFromDatabase } from "../../utils/firebase/firebase";
 import { Movie } from "../../utils/types/types";
 
 const HomePage = () => {
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const [movies, setMovies] = useState<Movie[] | null>([]);
 
   useEffect(() => {
     const getAllMovies = async () => {
@@ -39,15 +39,23 @@ const HomePage = () => {
         <p>
           It's not a 100% faithful copy of the original&nbsp;&mdash; the fonts,
           layouts and animations might differ slightly. My main focus was to
-          reproduce the app's interactive features, such as navigation
-          menus, filters, search, responsive design, etc.
+          reproduce the app's interactive features, such as navigation menus,
+          filters, search, responsive design, etc.
         </p>
         <p>
           This site was made with React framework. It uses Google Firestore
           database to host movie data, and it gets movie cover images from the
-          original site. The database only stores {movies.length + " "}
-          movie documents, but it should be enough to demonstrate the
-          functionality.
+          original site.{" "}
+          {
+            // Display this text if the movies array exists (was successfully loaded from Firestore)
+            movies && (
+              <span>
+                The database only stores {movies.length + " "}
+                movie documents, but it should be enough to demonstrate the
+                functionality.
+              </span>
+            )
+          }
         </p>
         <p>
           I didn't read or copy any of the JavaScript code from the original

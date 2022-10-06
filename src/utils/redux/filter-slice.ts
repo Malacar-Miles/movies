@@ -13,16 +13,13 @@ export const filterSlice = createSlice({
       return emptyFilter;
     },
 
-    addValueToField: (state, action) => {
-      const { fieldName, newValue }: { fieldName: string; newValue: string } =
+    addValueToField: (state: Filter, action) => {
+      const { fieldName, newValue }: { fieldName: keyof Filter; newValue: number | string } =
         action.payload;
 
-      // Convert state to "filter" type so that we can access its fields with [filedName]
-      const convertedState = state as Filter;
 
       // Get fieldCurrentValues
-      const fieldCurrentValues =
-        convertedState[fieldName as keyof Filter].fieldCurrentValues;
+      const fieldCurrentValues = state[fieldName].fieldCurrentValues;
 
       // If the fieldCurrentValues array doesn't yet contain newValue then update the filter
       if (!fieldCurrentValues.includes(newValue)) {
@@ -30,36 +27,33 @@ export const filterSlice = createSlice({
       }
     },
 
-    removeValueFromField: (state, action) => {
+    removeValueFromField: (state: Filter, action) => {
       const {
         fieldName,
         valueToRemove,
-      }: { fieldName: string; valueToRemove: string } = action.payload;
-
-      // Convert state to filter type so that we can access its fields with [filedName]
-      const convertedState = state as Filter;
+      }: { fieldName: keyof Filter; valueToRemove: number | string } = action.payload;
 
       // Get fieldCurrentValues
-      const fieldCurrentValues =
-        convertedState[fieldName as keyof Filter].fieldCurrentValues;
+      const fieldCurrentValues = state[fieldName].fieldCurrentValues;
 
       // If the fieldCurrentValues array contains valueToRemove then update the filter
       if (fieldCurrentValues.includes(valueToRemove)) {
-        convertedState[fieldName as keyof Filter].fieldCurrentValues =
-          fieldCurrentValues.filter((value) => value !== valueToRemove);
+        state[fieldName].fieldCurrentValues = fieldCurrentValues.filter(
+          (value) => value !== valueToRemove
+        );
       }
     },
   },
 });
 
 // Export selector functions to be used in components
-export const selectFieldCurrentValues = (fieldName: string) => {
+export const selectFieldCurrentValues = (fieldName: keyof Filter) => {
   return (state: RootState) =>
-    state.filter[fieldName as keyof Filter].fieldCurrentValues;
+    state.filter[fieldName].fieldCurrentValues;
 };
-export const selectFieldPossibleValues = (fieldName: string) => {
+export const selectFieldPossibleValues = (fieldName: keyof Filter) => {
   return (state: RootState) =>
-    state.filter[fieldName as keyof Filter].fieldPossibleValues;
+    state.filter[fieldName].fieldPossibleValues;
 };
 export const selectCurrentFilter = () => {
   return (state: RootState) => state.filter;
