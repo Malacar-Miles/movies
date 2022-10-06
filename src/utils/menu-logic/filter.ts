@@ -2,29 +2,29 @@ import { mapLanguageToCode } from "./language-codes";
 import { mapGenreToId } from "./genres";
 import { mapCountryNounToAdjective } from "./countries";
 import { allDecadesArray } from "./decades";
-import { movie } from "../types/types";
+import { Movie } from "../types/types";
 
-export type numberOrString = number | string;
-export type filterField = {
-  fieldPossibleValues: numberOrString[];
-  fieldCurrentValues: numberOrString[];
+export type NumberOrString = number | string;
+export type FilterField = {
+  fieldPossibleValues: NumberOrString[];
+  fieldCurrentValues: NumberOrString[];
 };
-export type filter = {
-  subs: filterField;
-  genre: filterField;
-  country: filterField;
-  decade: filterField;
+export type Filter = {
+  subs: FilterField;
+  genre: FilterField;
+  country: FilterField;
+  decade: FilterField;
 };
 
 // Create a filter field
 const createFilterField = (
-  fieldPossibleValues: numberOrString[]
-): filterField => {
+  fieldPossibleValues: NumberOrString[]
+): FilterField => {
   return { fieldPossibleValues: fieldPossibleValues, fieldCurrentValues: [] };
 };
 
 // Create an object that will serve as an empty filter
-export const emptyFilter: filter = {
+export const emptyFilter: Filter = {
   subs: createFilterField(Object.keys(mapLanguageToCode)),
   genre: createFilterField(Object.keys(mapGenreToId)),
   country: createFilterField(Object.keys(mapCountryNounToAdjective)),
@@ -33,7 +33,7 @@ export const emptyFilter: filter = {
 
 // Take an array of movies and return a filtered array
 // based on filter field values specified in the "filter" argument
-export const filterMovieList = (movies: movie[], filter: filter) =>
+export const filterMovieList = (movies: Movie[], filter: Filter) =>
   movies.filter((movie) => {
     // Make a check for each filter field
     for (const [filterFieldName, filterFieldValuesObject] of Object.entries(
@@ -56,7 +56,7 @@ export const filterMovieList = (movies: movie[], filter: filter) =>
           // in the corresponding array of the movie object
           values.forEach((value) => {
             if (
-              (movie[filterFieldName as keyof movie] as numberOrString[]).includes(
+              (movie[filterFieldName as keyof Movie] as NumberOrString[]).includes(
                 value
               )
             )

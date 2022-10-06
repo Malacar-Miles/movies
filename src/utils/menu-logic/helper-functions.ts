@@ -1,7 +1,7 @@
 // Take an object and reverse its key-value pairs
-type hashTable = Record<string | number, string | number>;
-export const reverseMap = (hashTable: hashTable) => {
-  const result: hashTable = {};
+type HashTable = Record<string | number, string | number>;
+export const reverseMap = (hashTable: HashTable) => {
+  const result: HashTable = {};
   for (let key in hashTable) {
     const value = hashTable[key];
     result[value] = key;

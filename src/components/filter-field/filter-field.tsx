@@ -10,7 +10,7 @@ import {
   selectFieldCurrentValues,
   selectFieldPossibleValues,
 } from "../../utils/redux/filter-slice";
-import { numberOrString } from "../../utils/menu-logic/filter";
+import { NumberOrString } from "../../utils/menu-logic/filter";
 
 const FilterField = ({
   fieldName,
@@ -25,14 +25,14 @@ const FilterField = ({
 
   const dispatch = useDispatch();
 
-  const fieldCurrentValues = useSelector(selectFieldCurrentValues(fieldName));
-  const fieldPossibleValues = useSelector(selectFieldPossibleValues(fieldName));
+  const fieldCurrentValues: NumberOrString[] = useSelector(selectFieldCurrentValues(fieldName));
+  const fieldPossibleValues: NumberOrString[] = useSelector(selectFieldPossibleValues(fieldName));
 
-  const fieldAddValue = (fieldName: string, newValue: numberOrString) => {
+  const fieldAddValue = (fieldName: string, newValue: NumberOrString) => {
     dispatch(addValueToField({ fieldName: fieldName, newValue: newValue }));
   };
 
-  const fieldRemoveValue = (fieldName: string, valueToRemove: numberOrString) => {
+  const fieldRemoveValue = (fieldName: string, valueToRemove: NumberOrString) => {
     dispatch(
       removeValueFromField({
         fieldName: fieldName,

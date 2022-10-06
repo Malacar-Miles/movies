@@ -6,10 +6,10 @@ import { filterMovieList } from "../../utils/menu-logic/filter";
 import { sortMovieList } from "../../utils/menu-logic/sort";
 import { selectCurrentSortState } from "../../utils/redux/sort-slice";
 import { selectCurrentFilter } from "../../utils/redux/filter-slice";
-import { movie } from "../../utils/types/types";
+import { Movie } from "../../utils/types/types";
 
 // Take an array of movie objects and render it as a list of MovieCard items
-const MovieList = ({ movies, enableFilter } : { movies: movie[] | null; enableFilter?: boolean }) => {
+const MovieList = ({ movies, enableFilter } : { movies: Movie[] | null; enableFilter?: boolean }) => {
   // Get all filter field values from Redux
   const allFilterFieldValues = useSelector(selectCurrentFilter());
   const sortState = useSelector(selectCurrentSortState());
@@ -17,7 +17,7 @@ const MovieList = ({ movies, enableFilter } : { movies: movie[] | null; enableFi
   // If the filter is enabled and the movie list exists, filter the movie list
   if (enableFilter && movies) {
     movies = filterMovieList(movies, allFilterFieldValues);
-    movies = sortMovieList(movies, sortState as keyof movie);
+    movies = sortMovieList(movies, sortState as keyof Movie);
   }
 
   // If movies array exists: (if it's not empty, show the movies, else show the message)

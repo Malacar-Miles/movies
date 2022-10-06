@@ -1,6 +1,6 @@
-import { movie } from "../types/types"
+import { Movie } from "../types/types"
 
-export const moviesJSON: movie[] = [
+export const moviesJSON: Movie[] = [
   {
     "title": "On the Silver Globe",
     "id": "on-the-silver-globe",

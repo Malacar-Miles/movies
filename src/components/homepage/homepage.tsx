@@ -7,10 +7,10 @@ import { useState, useEffect } from "react";
 import MovieList from "../movie-list/movie-list";
 import DecorativeElement from "../decorative-element/decorative-element";
 import { getAllMoviesFromDatabase } from "../../utils/firebase/firebase";
-import { movie } from "../../utils/types/types";
+import { Movie } from "../../utils/types/types";
 
 const HomePage = () => {
-  const [movies, setMovies] = useState<movie[]>([]);
+  const [movies, setMovies] = useState<Movie[]>([]);
 
   useEffect(() => {
     const getAllMovies = async () => {

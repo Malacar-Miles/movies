@@ -7,7 +7,7 @@ import { toTitleCase } from "../menu-logic/helper-functions";
 import { mapIdToGenre } from "../menu-logic/genres";
 import { mapLanguageToCode } from "../menu-logic/language-codes";
 import { decadeBoundaries } from "../menu-logic/decades";
-import { movie } from "../types/types";
+import { Movie } from "../types/types";
 
 // My web app's Firebase configuration
 const firebaseConfig = {
@@ -26,7 +26,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // Write an object that contains movie data into the Firestore database
-export const addMovieToDatabase = async (movie: movie) => {
+export const addMovieToDatabase = async (movie: Movie) => {
   try {
     // Write this object into the "movies" collection and use movie.id as the Firestore document id
     await setDoc(doc(db, "movies", movie.id), movie);
@@ -38,10 +38,10 @@ export const addMovieToDatabase = async (movie: movie) => {
 
 // Get all movie documents from Firestore and return them as an array of objects
 export const getAllMoviesFromDatabase = async () => {
-  const results: movie[] = [];
+  const results: Movie[] = [];
   try {
     const querySnapshot = await getDocs(collection(db, "movies"));
-    querySnapshot.forEach(movie => results.push(movie.data() as movie));
+    querySnapshot.forEach(movie => results.push(movie.data() as Movie));
   } catch (error) {
     if (error instanceof Error) console.log("Failed to fetch all movie data from DB: ", error.message);
   }
@@ -74,8 +74,8 @@ export const getMoviesByCategoryFromDatabase = async (categoryId: string, itemId
         throw new Error("Invalid categoryId");
     }
     const querySnapshot = await getDocs(q);
-    const results: movie[] = [];
-    querySnapshot.forEach(movie => results.push(movie.data() as movie));
+    const results: Movie[] = [];
+    querySnapshot.forEach(movie => results.push(movie.data() as Movie));
     return results;
   } catch (error) {
     if (error instanceof Error) console.log("Failed to fetch filtered movie data from DB: ", error.message);
@@ -98,8 +98,8 @@ export const searchAllMoviesFromDatabase = async (searchQuery: string) => {
 
   try {
     const querySnapshot = await getDocs(collection(db, "movies"));
-    const results: movie[] = [];
-    querySnapshot.forEach((movie) => results.push(movie.data() as movie));
+    const results: Movie[] = [];
+    querySnapshot.forEach((movie) => results.push(movie.data() as Movie));
     const filteredResults = results.filter((movie) =>
       searchForSubstring(movie.title, searchQuery)
     );

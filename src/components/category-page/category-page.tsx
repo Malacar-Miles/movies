@@ -23,11 +23,11 @@ import PageNotFound from "../page-not-found/page-not-found";
 import MovieList from "../movie-list/movie-list";
 import SortAndFilter from "../sort-and-filter/sort-and-filter";
 import DecorativeElement from "../decorative-element/decorative-element";
-import { movie } from "../../utils/types/types";
+import { Movie } from "../../utils/types/types";
 
 const CategoryPage = () => {
   const { categoryId, itemId } = useParams();
-  const [movies, setMovies] = useState<movie[] | null>(null);
+  const [movies, setMovies] = useState<Movie[] | null>(null);
   const dispatch = useDispatch();
   let categoryPageTitle, categoryPageSubtitle;
 

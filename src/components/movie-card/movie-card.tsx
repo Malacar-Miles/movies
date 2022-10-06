@@ -7,9 +7,9 @@ import { Link } from "react-router-dom";
 import { categories } from "../../utils/menu-logic/categories";
 import { mapCodeToLanguage } from "../../utils/menu-logic/language-codes";
 import { mapGenreToId } from "../../utils/menu-logic/genres";
-import { movie } from "../../utils/types/types";
+import { Movie } from "../../utils/types/types";
 
-const MovieCard = ({ movie }: { movie: movie }) => {
+const MovieCard = ({ movie }: { movie: Movie }) => {
   return (
     <article className="movie-card">
       <p className="subs">

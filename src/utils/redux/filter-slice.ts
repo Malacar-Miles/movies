@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { emptyFilter } from "../menu-logic/filter";
-import { filter } from "../menu-logic/filter";
-import { rootState } from "./store";
+import { Filter } from "../menu-logic/filter";
+import { RootState } from "./store";
 
 const initialState = emptyFilter;
 
@@ -18,11 +18,11 @@ export const filterSlice = createSlice({
         action.payload;
 
       // Convert state to "filter" type so that we can access its fields with [filedName]
-      const convertedState = state as filter;
+      const convertedState = state as Filter;
 
       // Get fieldCurrentValues
       const fieldCurrentValues =
-        convertedState[fieldName as keyof filter].fieldCurrentValues;
+        convertedState[fieldName as keyof Filter].fieldCurrentValues;
 
       // If the fieldCurrentValues array doesn't yet contain newValue then update the filter
       if (!fieldCurrentValues.includes(newValue)) {
@@ -37,15 +37,15 @@ export const filterSlice = createSlice({
       }: { fieldName: string; valueToRemove: string } = action.payload;
 
       // Convert state to filter type so that we can access its fields with [filedName]
-      const convertedState = state as filter;
+      const convertedState = state as Filter;
 
       // Get fieldCurrentValues
       const fieldCurrentValues =
-        convertedState[fieldName as keyof filter].fieldCurrentValues;
+        convertedState[fieldName as keyof Filter].fieldCurrentValues;
 
       // If the fieldCurrentValues array contains valueToRemove then update the filter
       if (fieldCurrentValues.includes(valueToRemove)) {
-        convertedState[fieldName as keyof filter].fieldCurrentValues =
+        convertedState[fieldName as keyof Filter].fieldCurrentValues =
           fieldCurrentValues.filter((value) => value !== valueToRemove);
       }
     },
@@ -54,15 +54,15 @@ export const filterSlice = createSlice({
 
 // Export selector functions to be used in components
 export const selectFieldCurrentValues = (fieldName: string) => {
-  return (state: rootState) =>
-    state.filter[fieldName as keyof filter].fieldCurrentValues;
+  return (state: RootState) =>
+    state.filter[fieldName as keyof Filter].fieldCurrentValues;
 };
 export const selectFieldPossibleValues = (fieldName: string) => {
-  return (state: rootState) =>
-    state.filter[fieldName as keyof filter].fieldPossibleValues;
+  return (state: RootState) =>
+    state.filter[fieldName as keyof Filter].fieldPossibleValues;
 };
 export const selectCurrentFilter = () => {
-  return (state: rootState) => state.filter;
+  return (state: RootState) => state.filter;
 };
 
 export const { resetFilter, addValueToField, removeValueFromField } =

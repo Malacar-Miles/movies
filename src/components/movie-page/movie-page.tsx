@@ -10,17 +10,17 @@ import { mapCodeToLanguage } from "../../utils/menu-logic/language-codes";
 import { categories } from "../../utils/menu-logic/categories";
 import PageNotFound from "../page-not-found/page-not-found";
 import DecorativeElement from "../decorative-element/decorative-element";
-import { movie } from "../../utils/types/types";
+import { Movie } from "../../utils/types/types";
 
 const MoviePage = () => {
   const { movieId } = useParams();
-  const [movie, setMovie] = useState<movie>();
+  const [movie, setMovie] = useState<Movie>();
 
   useEffect(() => {
     const getMovieData = async () => {
       if (movieId) {
         const movieData = await getMovieFromDatabase(movieId);
-        if (movieData) setMovie(movieData as movie);
+        if (movieData) setMovie(movieData as Movie);
       }
     };
 
